@@ -1,2 +1,1 @@
-# flowbadges
-Plataforma opensource feita pelos Flowers
+Inicio da plataforma Flow Badges
