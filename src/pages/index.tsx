@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 const Home: React.FC = () => {
   return (
-    <div className="bg-blue-900 min-h-screen min-w-screen">
+    <div className="bg-blue-900 h-screen w-screen">
       <Head>
         <title>Flow Badges</title>
       </Head>
