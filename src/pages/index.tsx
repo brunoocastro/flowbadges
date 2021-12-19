@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useFetch } from '../hooks/useFetch'
-import getAccValue from '../services/getAccValue'
 
 const Home: React.FC = () => {
   const [inputAccount, setInputAccount] = useState('')
