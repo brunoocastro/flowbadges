@@ -29,7 +29,7 @@ const Home: React.FC = () => {
         <h1 className="text-yellow-400 font-serif text-center">
           Seja vem vindo ao Flow badges
         </h1>
-        <h2 className="text-white text-center">
+        {/* <h2 className="text-white text-center">
           Vamos calcular o valor da sua conta:
         </h2>
         <div className="justify-self-center">
@@ -63,7 +63,7 @@ const Home: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </main>
     </div>
   )
