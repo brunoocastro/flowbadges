@@ -20,20 +20,20 @@ const Ranking: React.FC = () => {
   }, [data])
 
   return (
-    <div className="bg-cyan-400">
+    <div>
       <Head>
         <title>Ranking - Flow Badges</title>
       </Head>
 
       <main>
-        <h1 className="text-black font-serif text-center">
-          Ranking de emblemas por raridade
-        </h1>
+        <div className="m-4 p-3 rounded-xl bg-base-brown-700 w-8/10">
+          <h1 className="text-base-yellow-400 text-3xl font-mono font-serif text-center ">
+            Ranking de emblemas por raridade
+          </h1>
+        </div>
 
         {!data && <h1>Carregando ranking de emblemas</h1>}
-        <div className="grid grid-cols-1  gap-2 px-4">
-          {console.log('ordenated', badgeRanking)}
-
+        <div className="grid grid-cols-1  gap-3 px-4">
           {data &&
             badgeRanking.map(badge => (
               <div

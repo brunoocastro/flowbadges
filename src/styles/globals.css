@@ -8,9 +8,24 @@
   margin: 0;
 }
 
-html,
+
+
+@layer base {
+  html,
 body {
-  background: '#121214';
+  @apply bg-base-gray
+  /* background: '#121214'
   color: '#E1E1E6';
-  font-family: Roboto, Cantarell, Fira Sans, Helvetica Neue, sans-serif;
+  font-family: Roboto, Cantarell, Fira Sans, Helvetica Neue, sans-serif; */
+}}
+
+.defaultBG {
+  @apply h-screen w-screen
+  bg-left-top bg-pattern
+  bg-repeat bg-16
+  bg-blend-soft-light
+  bg-opacity-60
+  /* mix-blend-normal */
+  /* blur-[1.5px] */
+  /* backdrop-blur-s */
 }
