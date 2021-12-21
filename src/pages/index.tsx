@@ -28,7 +28,7 @@ const Home: React.FC = () => {
 
       <main className="h-screen w-screen flex ">
         <div className="flex flex-col text-center w-3/4 h-4/10 bg-base-black rounded-3xl shadow-xl rounded-md self-center m-auto p-10">
-          <h1 className=" text-base-white text-8xl font-bold shadow-inner font-mono text-center">
+          <h1 className=" text-base-white text-3xl font-bold shadow-inner font-mono text-center sm:text-8xl">
             Seja bem vindo ao
           </h1>
           <Image
@@ -43,7 +43,7 @@ const Home: React.FC = () => {
 
           <button
             onClick={() => Router.push('/ranking')}
-            className="rounded-full font-mono text-2xl bg-blue-600 transition-all w-fit px-10 py-2 m-auto hover:bg-blue-800 hover:text-base-yellow-400"
+            className="rounded-full font-mono text-xl mt-5 sm:text-2xl bg-blue-600 transition-all w-fit px-5 sm:px-10 py-2 m-auto hover:bg-blue-800 hover:text-base-yellow-400"
           >
             Ranking
           </button>
