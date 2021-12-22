@@ -26,9 +26,9 @@ const Ranking: React.FC = () => {
         <title>Ranking - Flow Badges</title>
       </Head>
 
-      <main className="h-screen w-screen">
-        <div className="content-center w-10/12">
-          <div className="m-4 p-3 rounded-xl bg-base-brown-700 w-8/10">
+      <main className="h-screen w-screen flex justify-center overflow-auto">
+        <div className="content-center sm:w-10/12 max-w-2xl ">
+          <div className="m-5 p-3 rounded-xl bg-base-brown-700 w-8/10">
             <h1
               className="text-base-yellow-400 font-cursive text-3xl text-center hover:cursor-pointer"
               onClick={() => Router.push('/')}
@@ -37,36 +37,54 @@ const Ranking: React.FC = () => {
             </h1>
           </div>
           {!data && <h1>Carregando ranking de emblemas</h1>}
-          <div
-            className="h-screen grid grid-cols-1  gap-3 px-4
-          overflow-auto"
-          >
+          <div className="h-screen grid grid-cols-1 gap-3 px-4">
             {data &&
-              badgeRanking.map(badge => (
+              badgeRanking.map((badge, index) => (
                 <div
                   key={badge.code}
-                  className="flex
-                    grid-flow-row
-                    w-full mx-auto space-x-6
-                  bg-gray-100 shadow-md rounded-lg p-2
-                    border border-gray-500/50"
+                  className="
+                    grid
+                    grid-rows-1
+                    grid-cols-10
+                    w-full mx-auto space-x-1
+                  bg-gray-100 rounded-lg p-3
+                    border border-gray-500/50
+                    shadow-xl text-left"
                 >
-                  <div className="flex-1 object-cover mr-4">
+                  <div className="h-max w-24 bg-transparent  flex origin-right col-span-2">
                     <Image
-                      className="w-12 h-10 object-cover mr-4"
                       src={badge.src}
-                      width="100"
-                      height="100"
-                      layout="responsive"
-                      objectFit="contain"
+                      width="100%"
+                      height="100%"
                       alt={badge.name}
                     />
                   </div>
-                  <div className="flex- flex-col">
-                    <h1 className="text-mono flex-row">Nome: {badge.name}</h1>
-
-                    <h1 className="text-base">Código: {badge.code}</h1>
-                    <h1>Resgates: {badge.count}</h1>
+                  <div className="flex flex-col justify-between col-span-7 font-mono ">
+                    <div className="flex items-center">
+                      <h1 className="font-sans text-lg">Nome:</h1>
+                      <h2 className="px-2 text-base truncate">{badge.name}</h2>
+                    </div>
+                    <div className="flex items-center">
+                      <h1 className="font-sans text-lg">Código: </h1>
+                      <h2 className="px-2 text-base">{badge.code}</h2>
+                    </div>
+                    <div className="flex items-center">
+                      <h1 className="font-sans text-lg">Resgates: </h1>
+                      <h2 className="px-2 text-base">{badge.count}</h2>
+                    </div>
+                  </div>
+                  <div className="flex content-end align-text-top justify-end">
+                    <h1
+                      className={`
+                      text-base-black
+                      ${index + 1 === 1 && 'text-yellow-500'}
+                      ${index + 1 === 2 && 'text-gray-400'}
+                      ${index + 1 === 3 && 'text-orange-600'}
+                      h-fit text-4xl
+                       italic antialiased`}
+                    >
+                      {index + 1}º
+                    </h1>
                   </div>
                 </div>
               ))}
