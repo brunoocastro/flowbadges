@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { useMemo, useState } from 'react'
+import Router from 'next/router'
+import { useMemo } from 'react'
 import { useFetch } from '../hooks/useFetch'
 
 interface badgesResponse {
@@ -27,7 +28,10 @@ const Ranking: React.FC = () => {
 
       <main>
         <div className="m-4 p-3 rounded-xl bg-base-brown-700 w-8/10">
-          <h1 className="text-base-yellow-400 text-3xl font-mono font-serif text-center ">
+          <h1
+            className="text-base-yellow-400 text-3xl font-mono font-serif text-center hover:cursor-pointer"
+            onClick={() => Router.push('/')}
+          >
             Ranking de emblemas por raridade
           </h1>
         </div>

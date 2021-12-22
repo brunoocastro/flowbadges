@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Router from 'next/router'
 import { useState } from 'react'
-import { useFetch } from '../hooks/useFetch'
 
 const Home: React.FC = () => {
   const [inputAccount, setInputAccount] = useState('')
@@ -33,7 +32,7 @@ const Home: React.FC = () => {
           </h1>
           <Image
             className="shadow-xl"
-            src={'/assets/logo-black-white.png'}
+            src={'/assets/logo-green-white.svg'}
             alt="Logo Flow Badges"
             width="100%"
             height="30%"
