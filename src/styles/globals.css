@@ -8,24 +8,19 @@
   margin: 0;
 }
 
-
-
 @layer base {
   html,
-body {
-  @apply bg-base-gray
-  /* background: '#121214'
-  color: '#E1E1E6';
-  font-family: Roboto, Cantarell, Fira Sans, Helvetica Neue, sans-serif; */
-}}
+  body {
+    @apply bg-base-gray font-sans text-base-black h-screen w-screen;
+  }
+}
 
 .defaultBG {
-  @apply h-screen w-screen
+  @apply h-full w-full
   bg-left-top bg-pattern
   bg-repeat bg-16
   bg-blend-soft-light
   bg-opacity-60
-  /* mix-blend-normal */
-  /* blur-[1.5px] */
-  /* backdrop-blur-s */
+  bg-fixed
+  overflow-hidden;
 }
