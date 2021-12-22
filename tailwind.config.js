@@ -16,7 +16,8 @@ module.exports = {
         16: '4rem'
       },
       fontFamily: {
-        sans: ['Roboto', ...defaultTheme.fontFamily.sans]
+        sans: ['Roboto', ...defaultTheme.fontFamily.sans],
+        cursive: ['Lobster', ...defaultTheme.fontFamily.sans]
       },
       colors: {
         brown: {

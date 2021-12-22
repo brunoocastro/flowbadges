@@ -26,41 +26,51 @@ const Ranking: React.FC = () => {
         <title>Ranking - Flow Badges</title>
       </Head>
 
-      <main>
-        <div className="m-4 p-3 rounded-xl bg-base-brown-700 w-8/10">
-          <h1
-            className="text-base-yellow-400 text-3xl font-mono font-serif text-center hover:cursor-pointer"
-            onClick={() => Router.push('/')}
+      <main className="h-screen w-screen">
+        <div className="content-center w-10/12">
+          <div className="m-4 p-3 rounded-xl bg-base-brown-700 w-8/10">
+            <h1
+              className="text-base-yellow-400 font-cursive text-3xl text-center hover:cursor-pointer"
+              onClick={() => Router.push('/')}
+            >
+              Ranking de emblemas por raridade
+            </h1>
+          </div>
+          {!data && <h1>Carregando ranking de emblemas</h1>}
+          <div
+            className="h-screen grid grid-cols-1  gap-3 px-4
+          overflow-auto"
           >
-            Ranking de emblemas por raridade
-          </h1>
-        </div>
+            {data &&
+              badgeRanking.map(badge => (
+                <div
+                  key={badge.code}
+                  className="flex
+                    grid-flow-row
+                    w-full mx-auto space-x-6
+                  bg-gray-100 shadow-md rounded-lg p-2
+                    border border-gray-500/50"
+                >
+                  <div className="flex-1 object-cover mr-4">
+                    <Image
+                      className="w-12 h-10 object-cover mr-4"
+                      src={badge.src}
+                      width="100"
+                      height="100"
+                      layout="responsive"
+                      objectFit="contain"
+                      alt={badge.name}
+                    />
+                  </div>
+                  <div className="flex- flex-col">
+                    <h1 className="text-mono flex-row">Nome: {badge.name}</h1>
 
-        {!data && <h1>Carregando ranking de emblemas</h1>}
-        <div className="grid grid-cols-1  gap-3 px-4">
-          {data &&
-            badgeRanking.map(badge => (
-              <div
-                key={badge.code}
-                className="flex
-                w-full
-                mx-auto space-x-6 bg-gray-100 shadow-md rounded-lg p-2 border border-gray-500/50"
-              >
-                <Image
-                  className="w-12 h-full object-cover mr-4"
-                  src={badge.src}
-                  width={64}
-                  height={64}
-                  alt={badge.code}
-                />
-                <div className="flex-col">
-                  <h1 className="text-base">Código: {badge.code}</h1>
-                  <h1 className="text-">Nome: {badge.name}</h1>
-
-                  <h1>Resgates: {badge.count}</h1>
+                    <h1 className="text-base">Código: {badge.code}</h1>
+                    <h1>Resgates: {badge.count}</h1>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+          </div>
         </div>
       </main>
     </div>
