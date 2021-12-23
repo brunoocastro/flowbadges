@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Router from 'next/router'
 import { useMemo } from 'react'
+import BaseModal from '../components/Modal'
 import { useFetch } from '../hooks/useFetch'
 
 interface badgesResponse {
@@ -43,20 +44,23 @@ const Ranking: React.FC = () => {
                 <div
                   key={badge.code}
                   className="
-                    grid
-                    grid-rows-1
-                    grid-cols-10
+                    grid grid-rows-1 grid-cols-10
                     w-full mx-auto space-x-1
                   bg-gray-100 rounded-lg p-3
                     border border-gray-500/50
-                    shadow-xl text-left"
+                    shadow-xl text-left text-base-black"
                 >
-                  <div className="h-max w-24 bg-transparent  flex origin-right col-span-2">
+                  {index === 0 && <BaseModal badge={badge} />}
+
+                  <div className="h-max w-20 md:w-24 bg-transparent  flex origin-right col-span-2">
                     <Image
                       src={badge.src}
                       width="100%"
                       height="100%"
                       alt={badge.name}
+                      onClick={() =>
+                        window.open(badge.high || badge.src, '_blank')
+                      }
                     />
                   </div>
                   <div className="flex flex-col justify-between col-span-7 font-mono ">
@@ -77,11 +81,11 @@ const Ranking: React.FC = () => {
                     <h1
                       className={`
                       text-base-black
-                      ${index + 1 === 1 && 'text-yellow-500'}
-                      ${index + 1 === 2 && 'text-gray-400'}
-                      ${index + 1 === 3 && 'text-orange-600'}
+                      ${index + 1 === 1 && 'text-[#FFD700]'}
+                      ${index + 1 === 2 && 'text-[#C0C0C0]'}
+                      ${index + 1 === 3 && 'text-[#9c5221]'}
                       h-fit text-4xl
-                       italic antialiased`}
+                      italic antialiased`}
                     >
                       {index + 1}º
                     </h1>

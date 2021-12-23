@@ -11,7 +11,7 @@
 @layer base {
   html,
   body {
-    @apply bg-base-gray font-sans text-base-black h-screen w-screen;
+    @apply bg-base-gray font-sans text-base-white h-screen w-screen;
   }
 }
 
