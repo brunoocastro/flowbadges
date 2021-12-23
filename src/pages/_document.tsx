@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
         <body className="defaultBG">
           <Main />
           <NextScript />
-          <FooterCP />
+          {/* <FooterCP /> */}
         </body>
       </Html>
     )

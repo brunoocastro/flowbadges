@@ -1,13 +1,32 @@
+/* eslint-disable camelcase */
 import Head from 'next/head'
 import Image from 'next/image'
 import Router from 'next/router'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import BaseModal from '../components/Modal'
 import { useFetch } from '../hooks/useFetch'
 
+export interface badgeData {
+  name: string
+  code: string
+  src: string
+  high: string
+  description: string
+  created_at: string
+  hq: boolean
+  updated_at: string
+  starts_on: string
+  creator_profile_id: string
+  status: boolean
+  expires_at: string
+  count: number
+  badge_id: string
+  percentage_badge: number
+}
+
 interface badgesResponse {
-  badges: any[]
-  status: { error: string; message: string; reason: any }
+  badges: badgeData[]
+  status: { error: string; message: string; reason?: string }
   // eslint-disable-next-line camelcase
   total_badges: number
 }
@@ -21,6 +40,16 @@ const Ranking: React.FC = () => {
     return (data && data.badges.sort((a, b) => a.count - b.count)) || []
   }, [data])
 
+  const [showModal, setShowModal] = useState(false)
+  const [badgeToModal, setBadgeToModal] = useState<badgeData>({})
+  const [rankingPosition, setRankingPosition] = useState(0)
+
+  const setBadgeModalData = (badge: badgeData, position: number) => {
+    setBadgeToModal(badge)
+    setRankingPosition(position)
+    setShowModal(true)
+  }
+
   return (
     <div>
       <Head>
@@ -28,6 +57,13 @@ const Ranking: React.FC = () => {
       </Head>
 
       <main className="h-screen w-screen flex justify-center overflow-auto">
+        <BaseModal
+          badge={badgeToModal}
+          show={showModal}
+          setShow={setShowModal}
+          position={rankingPosition}
+        />
+
         <div className="content-center sm:w-10/12 max-w-2xl ">
           <div className="m-5 p-3 rounded-xl bg-base-brown-700 w-8/10">
             <h1
@@ -49,10 +85,9 @@ const Ranking: React.FC = () => {
                   bg-gray-100 rounded-lg p-3
                     border border-gray-500/50
                     shadow-xl text-left text-base-black"
+                  onClick={() => setBadgeModalData(badge, index + 1)}
                 >
-                  {index === 0 && <BaseModal badge={badge} />}
-
-                  <div className="h-max w-20 md:w-24 bg-transparent  flex origin-right col-span-2">
+                  <div className="h-max w-20 md:w-24 bg-transparent z-10  flex origin-right col-span-2">
                     <Image
                       src={badge.src}
                       width="100%"
@@ -81,9 +116,9 @@ const Ranking: React.FC = () => {
                     <h1
                       className={`
                       text-base-black
-                      ${index + 1 === 1 && 'text-[#FFD700]'}
-                      ${index + 1 === 2 && 'text-[#C0C0C0]'}
-                      ${index + 1 === 3 && 'text-[#9c5221]'}
+                      ${index + 1 === 1 && 'text-metal-gold'}
+                      ${index + 1 === 2 && 'text-metal-iron'}
+                      ${index + 1 === 3 && 'text-metal-bronze'}
                       h-fit text-4xl
                       italic antialiased`}
                     >
