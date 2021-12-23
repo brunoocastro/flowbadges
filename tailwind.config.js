@@ -7,6 +7,42 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
+    keyframes: {
+      modalBgShow: {
+        '0%': { opacity: '0' },
+        '100%': { opacity: '1' }
+      },
+      modalBgOut: {
+        '100%': { opacity: '1' },
+        '0%': { opacity: '0' }
+      },
+      modalPanelShow: {
+        '0%': {
+          opacity: '0',
+          transform: ' scale(.95)'
+        },
+        '100%': {
+          opacity: '1',
+          transform: 'scale(1)'
+        }
+      },
+      modalPanelOut: {
+        '100%': {
+          opacity: '1',
+          transform: 'scale(.95)'
+        },
+        '0%': {
+          opacity: '0',
+          transform: 'scale(1)'
+        }
+      }
+    },
+    animation: {
+      modalBgShow: 'modalBgShow 300ms ease-out',
+      modalBgOut: 'modalBgOut 200ms ease-in',
+      modalPanelShow: 'modalPanelShow 300ms ease-out',
+      modalPanelOut: 'modalPanelOut 200ms ease-in'
+    },
     extend: {
       backgroundImage: {
         pattern: `url('/assets/fbPattern.svg')`
