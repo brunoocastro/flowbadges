@@ -28,7 +28,6 @@ const Home: React.FC = () => {
       </Head>
 
       <main className="h-screen w-screen flex flex-col ">
-        <BaseModal />
         <div className="flex flex-col text-center w-3/4 h-4/10 bg-base-black rounded-3xl shadow-xl rounded-md self-center m-auto p-10">
           <h1 className=" text-base-white text-3xl font-bold shadow-inner font-mono text-center sm:text-8xl">
             Seja bem vindo ao

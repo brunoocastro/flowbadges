@@ -3,12 +3,14 @@ import Image from 'next/image'
 import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
 import { useFetch } from '../../hooks/useFetch'
 import { badgeData } from '../../pages/ranking'
+import verifyPodcast from '../../utils/verifyPodcast'
 
 interface ModalProps {
   show: boolean
   setShow: Dispatch<SetStateAction<boolean>>
   position: number
   badge: badgeData
+  maxPercentBadge: number
 }
 
 interface tradeData {
@@ -57,15 +59,19 @@ interface badgeFeedData {
 }
 
 const BaseModal = (props: ModalProps) => {
-  const { show, setShow, position, badge } = props
-  const { src, name, code, high, percentage_badge, starts_on } = badge
+  console.log('Props', props)
+  const { show, setShow, position, badge, maxPercentBadge } = props
 
-  const maxPercentBadge = 1.025270237095511
+  const { src, name, code, high, percentage_badge, starts_on } = props.badge
+
   const date = new Date(starts_on)
 
-  const rarity = useCallback(
+  const podcast = useMemo(() => verifyPodcast(src), [src])
+  console.log('Code', src, podcast)
+
+  const rarity = useMemo(
     () => (maxPercentBadge - percentage_badge) * 100,
-    [percentage_badge]
+    [percentage_badge, maxPercentBadge]
   )
 
   const badgeDataLink = (code: string) =>
@@ -140,8 +146,10 @@ const BaseModal = (props: ModalProps) => {
           </div>
         )}
         <div>{data?.status.message}</div>
+
         {console.log(rarity)}
         {console.log(badge)}
+        <h1 className="text-base-white">{podcast}</h1>
         <h1 className="text-base-white">MODAL</h1>
       </div>
     )

@@ -41,13 +41,31 @@ const Ranking: React.FC = () => {
   }, [data])
 
   const [showModal, setShowModal] = useState(false)
-  const [badgeToModal, setBadgeToModal] = useState<badgeData>({})
+  const [badgeToModal, setBadgeToModal] = useState<badgeData>({
+    name: '',
+    code: '',
+    src: '',
+    high: '',
+    description: '',
+    created_at: '',
+    hq: false,
+    updated_at: '',
+    starts_on: '',
+    creator_profile_id: '',
+    status: false,
+    expires_at: '',
+    count: 0,
+    badge_id: '',
+    percentage_badge: 0
+  })
   const [rankingPosition, setRankingPosition] = useState(0)
+  const [maxPercentBadge, setMaxPercentBadge] = useState(1.26)
 
   const setBadgeModalData = (badge: badgeData, position: number) => {
     setBadgeToModal(badge)
     setRankingPosition(position)
     setShowModal(true)
+    data && setMaxPercentBadge(data?.badges[-1]?.percentage_badge || 1.26)
   }
 
   return (
@@ -57,13 +75,15 @@ const Ranking: React.FC = () => {
       </Head>
 
       <main className="h-screen w-screen flex justify-center overflow-auto">
-        <BaseModal
-          badge={badgeToModal}
-          show={showModal}
-          setShow={setShowModal}
-          position={rankingPosition}
-        />
-
+        {showModal && (
+          <BaseModal
+            badge={badgeToModal}
+            show={showModal}
+            setShow={setShowModal}
+            position={rankingPosition}
+            maxPercentBadge={maxPercentBadge}
+          />
+        )}
         <div className="content-center sm:w-10/12 max-w-2xl ">
           <div className="m-5 p-3 rounded-xl bg-base-brown-700 w-8/10">
             <h1
