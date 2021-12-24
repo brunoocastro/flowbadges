@@ -86,7 +86,7 @@ const Home: React.FC = () => {
             </div>
           </div> */}
         </div>
-        {/* <FooterCP /> */}
+        <FooterCP />
       </main>
     </div>
   )

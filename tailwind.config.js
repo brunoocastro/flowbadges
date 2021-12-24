@@ -43,6 +43,9 @@ module.exports = {
           brown: {
             400: '#805C04',
             700: '#332502'
+          },
+          blue: {
+            700: "#1E293B"
           }
         },
         metal: {
