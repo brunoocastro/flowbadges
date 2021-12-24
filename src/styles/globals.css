@@ -17,7 +17,7 @@
 
 .defaultBG {
   @apply h-full w-full
-  bg-left-top bg-pattern
+  bg-left-top
   bg-repeat bg-16
   bg-blend-soft-light
   bg-opacity-60

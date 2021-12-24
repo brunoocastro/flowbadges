@@ -44,6 +44,14 @@ module.exports = {
       modalPanelOut: 'modalPanelOut 200ms ease-in'
     },
     extend: {
+      spacing: {
+        4: '0.25rem',
+        8: '0.5rem',
+        16: '1rem',
+        32: '2rem',
+        48: '2.5rem',
+        5: '36rem'
+      },
       backgroundImage: {
         pattern: `url('/assets/fbPattern.svg')`
       },
