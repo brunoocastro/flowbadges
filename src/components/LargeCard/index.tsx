@@ -1,34 +1,15 @@
 /* eslint-disable camelcase */
 import Image from 'next/image'
-import { off } from 'process'
-import { useCallback, useEffect, useState } from 'react'
+import { MouseEventHandler, useCallback, useContext, useState } from 'react'
+import { BadgeContext } from '../../pages/rank'
 import { BadgesResponse } from '../../types'
 import { CopyCode } from '../common/CopyToClipboard'
 
 export const LargeCard = ({ badges }: BadgesResponse) => {
-  const [show, setShow] = useState(false)
-  const [thisBadge, setThisBadge] = useState('')
-  const [selected, setSelected] = useState(false)
-
-  const toggle = useCallback(
-    code => {
-      if (thisBadge === code) {
-        setSelected(true)
-      }
-    },
-    [thisBadge]
-  )
-
-  console.log(thisBadge)
-  // useEffect(() => {
-  //   if (thisBadge) {
-  //     setThisBadge('')
-  //   }
-  // }, [thisBadge])
+  const { setSelectedItem, toggle } = useContext(BadgeContext)
 
   return (
     <>
-      <CopyCode item={thisBadge} show={selected} />
       {badges
         .filter((_, i) => i >= 0 && i < 3)
         .map((badge, index) => {
@@ -68,7 +49,7 @@ export const LargeCard = ({ badges }: BadgesResponse) => {
                     <button
                       className="rounded-md overflow-hidden bg-slate-600 hover:bg-slate-700 border-yellow-50 col-span-3 grid grid-cols-4"
                       onClick={() => {
-                        setThisBadge(badge.code)
+                        setSelectedItem(badge.code)
                         toggle(badge.code)
                       }}
                     >

@@ -1,8 +1,12 @@
 import Image from 'next/image'
+import { useContext } from 'react'
+import { BadgeContext } from '../../pages/rank'
 import { BadgesResponse } from '../../types'
 import { CopyCode } from '../common/CopyToClipboard'
 
 export const SmallCard = ({ badges }: BadgesResponse) => {
+  const { setSelectedItem, toggle } = useContext(BadgeContext)
+
   return (
     <>
       {badges
@@ -42,7 +46,10 @@ export const SmallCard = ({ badges }: BadgesResponse) => {
                     </span>
                     <button
                       className="rounded-md overflow-hidden bg-slate-600 hover:bg-slate-700 border-yellow-50 col-span-3 grid grid-cols-4"
-                      onClick={() => copyCode(badge.code)}
+                      onClick={() => {
+                        setSelectedItem(badge.code)
+                        toggle(badge.code)
+                      }}
                     >
                       <div className="bg-slate-50 text-slate-600 h-full py-[12px] flex justify-center items-center">
                         +

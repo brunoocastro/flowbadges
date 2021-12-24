@@ -12,15 +12,16 @@ export const CopyCode = ({ item, show = false }: CopyCodeProps) => {
   useEffect(() => {
     if (show) {
       setState(show)
+      navigator.clipboard.writeText(item)
     }
-  }, [show])
-
-  navigator.clipboard.writeText(item)
+  }, [item, show])
 
   return (
     <ClassicModal
       title="Código"
-      body={`O código ${item} foi copiado.`}
+      body={(
+        <>O código <span className="font-medium">#{item}</span> foi copiado.</>
+      )}
       show={state}
       closeModal={() => setState(prevState => !prevState)}
     />
