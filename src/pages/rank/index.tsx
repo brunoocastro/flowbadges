@@ -11,7 +11,7 @@ import { useFetch } from '../../hooks/useFetch'
 import { LargeCard } from '../../components/LargeCard'
 import { SmallCard } from '../../components/SmallCard'
 import { Search } from '../../components/Search'
-import Hero from '../../components/Hero'
+import {Hero} from '../../components/Hero'
 import { BadgesResponse } from '../../types'
 import { CopyCode } from '../../components/common/CopyToClipboard'
 

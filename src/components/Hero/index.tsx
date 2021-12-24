@@ -1,4 +1,4 @@
-const index = () => {
+export const Hero = () => {
   return (
     <section className="relative w-full mb-[48px]">
       <aside className="h-[200px] bg-yellow-500 absolute w-screen block inset-x-2/4 -translate-x-1/2 mx-auto -z-20 overflow-hidden"></aside>
@@ -6,5 +6,3 @@ const index = () => {
     </section>
   )
 }
-
-export default index

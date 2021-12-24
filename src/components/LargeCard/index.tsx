@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { MouseEventHandler, useCallback, useContext, useState } from 'react'
 import { BadgeContext } from '../../pages/rank'
 import { BadgesResponse } from '../../types'
+import { CopyIcon } from '../common/Copy Icon'
 import { CopyCode } from '../common/CopyToClipboard'
 
 export const LargeCard = ({ badges }: BadgesResponse) => {
@@ -54,7 +55,7 @@ export const LargeCard = ({ badges }: BadgesResponse) => {
                       }}
                     >
                       <div className="bg-slate-50 text-slate-600 w-full h-full py-[12px] flex justify-center items-center">
-                        +
+                        <CopyIcon />
                       </div>
                       <span className="col-span-3 align-middle m-auto text-xs w-100 ">
                         #{badge.code}
