@@ -1,4 +1,3 @@
-const { url } = require('inspector')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
@@ -45,7 +44,8 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        pattern: `url('/assets/fbPattern.svg')`
+        pattern: `url('/assets/fbPattern.svg')`,
+        home: `url('/assets/home-background.png')`
       },
       backgroundSize: {
         50: '50%',
@@ -69,8 +69,11 @@ module.exports = {
           900: '#43302b'
         },
         base: {
+          background: '#1e293b',
+          backgroundDark: '#131B25',
           gray: '#131C25',
           yellow: {
+            100: '#FFEDC2',
             400: '#FFDA80',
             700: '#FFB709'
           },
