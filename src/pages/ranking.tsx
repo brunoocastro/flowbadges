@@ -27,17 +27,21 @@ const Ranking: React.FC = () => {
       </Head>
 
       <main className="flex justify-center">
-        <div className="content-center sm:w-10/12 max-w-2xl ">
-          <div className="m-5 p-3 rounded-xl bg-base-brown-700 w-8/10">
+        <div className="content-center items-center sm:w-10/12 max-w-2xl ">
+          <div className="m-5 p-3 rounded-xl bg-base-backgroundDark border-2 w-8/10">
             <h1
-              className="text-base-yellow-400 font-cursive text-3xl text-center hover:cursor-pointer"
+              className="text-base-white font-cursive text-3xl text-center hover:cursor-pointer"
               onClick={() => Router.push('/')}
             >
               Ranking de emblemas por raridade
             </h1>
           </div>
-          {!data && <h1>Carregando ranking de emblemas</h1>}
-          <div className="h-screen grid grid-cols-1 gap-3 px-4">
+          {!data && (
+            <h1 className="text-xl text-center mx-auto p-3 bg-base-backgroundDark rounded-full border-2 w-[80%]">
+              Carregando ranking de emblemas...
+            </h1>
+          )}
+          <div className="pb-10 grid grid-cols-1 gap-3 px-4">
             {data &&
               badgeRanking.map((badge, index) => (
                 <div
@@ -47,11 +51,11 @@ const Ranking: React.FC = () => {
                     grid-rows-1
                     grid-cols-10
                     w-full mx-auto space-x-1
-                  bg-gray-100 rounded-lg p-3
+                  bg-gray-100 rounded-lg sm:p-3
                     border border-gray-500/50
-                    shadow-xl text-left"
+                    shadow-xl text-left text-base-black"
                 >
-                  <div className="h-max w-24 bg-transparent  flex origin-right col-span-2">
+                  <div className="h-full w-16 sm:w-24 bg-transparent flex items-center justify-center rounded-md col-span-2">
                     <Image
                       src={badge.src}
                       width="100%"

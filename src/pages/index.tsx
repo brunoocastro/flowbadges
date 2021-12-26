@@ -12,11 +12,18 @@ const Home: React.FC = () => {
       href: '/ranking',
       coverUrl: '/assets/rank-badges-cover.png'
     },
+    // {
+    //   title: 'Calcule sua Conta',
+    //   description:
+    //     'Descubra quanto vale sua conta em Sparks baseado nos seus emblemas resgatados.',
+    //   href: '/calcule-sua-conta',
+    //   coverUrl: '/assets/profile-stats-cover.png'
+    // }
     {
-      title: 'Calcule sua Conta',
+      title: 'Discord',
       description:
-        'Descubra quanto vale sua conta em Sparks baseado nos seus emblemas resgatados.',
-      href: '/calcule-sua-conta',
+        'Entre no nosso discord, faça parte da comunidade e ajude na construção dessa plataforma',
+      href: 'https://discord.gg/eFFuZecjqR',
       coverUrl: '/assets/profile-stats-cover.png'
     }
   ]
@@ -37,7 +44,7 @@ const Home: React.FC = () => {
                   className="p-[2px] border-gradient-two rounded-lg relative"
                 >
                   <div className="absolute -inset-2 bg-base-yellow-700 rounded-lg blur opacity-10" />
-                  <div className="relative bg-base-background rounded-lg p-5 text-center">
+                  <div className="relative h-full bg-base-background rounded-lg p-5 text-center">
                     <Image
                       src={link.coverUrl}
                       width={249}

@@ -21,7 +21,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body className="relative bg-home bg-base-backgroundDark h-screen w-screen ">
+        <body className="relative bg-home bg-base-backgroundDark h-screen w-screen">
           <div className="min-h-screen w-screen flex flex-col justify-between">
             <Header />
             <SocialBar />
