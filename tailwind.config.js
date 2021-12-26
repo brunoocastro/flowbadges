@@ -1,4 +1,3 @@
-const { url } = require('inspector')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
@@ -7,9 +6,46 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
+    keyframes: {
+      modalBgShow: {
+        '0%': { opacity: '0' },
+        '100%': { opacity: '1' }
+      },
+      modalBgOut: {
+        '100%': { opacity: '1' },
+        '0%': { opacity: '0' }
+      },
+      modalPanelShow: {
+        '0%': {
+          opacity: '0',
+          transform: ' scale(.95)'
+        },
+        '100%': {
+          opacity: '1',
+          transform: 'scale(1)'
+        }
+      },
+      modalPanelOut: {
+        '100%': {
+          opacity: '1',
+          transform: 'scale(.95)'
+        },
+        '0%': {
+          opacity: '0',
+          transform: 'scale(1)'
+        }
+      }
+    },
+    animation: {
+      modalBgShow: 'modalBgShow 300ms ease-out',
+      modalBgOut: 'modalBgOut 200ms ease-in',
+      modalPanelShow: 'modalPanelShow 300ms ease-out',
+      modalPanelOut: 'modalPanelOut 200ms ease-in'
+    },
     extend: {
       backgroundImage: {
-        pattern: `url('/assets/fbPattern.svg')`
+        pattern: `url('/assets/fbPattern.svg')`,
+        home: `url('/assets/home-background.png')`
       },
       backgroundSize: {
         50: '50%',
@@ -33,8 +69,11 @@ module.exports = {
           900: '#43302b'
         },
         base: {
+          background: '#1e293b',
+          backgroundDark: '#131B25',
           gray: '#131C25',
           yellow: {
+            100: '#FFEDC2',
             400: '#FFDA80',
             700: '#FFB709'
           },
