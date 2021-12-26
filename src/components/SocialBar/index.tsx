@@ -3,7 +3,8 @@ import {
   FaTwitch,
   FaTwitter,
   FaTelegram,
-  FaWhatsapp
+  FaWhatsapp,
+  FaDiscord
 } from 'react-icons/fa'
 
 export const SocialBar = () => {
@@ -22,14 +23,14 @@ export const SocialBar = () => {
       <li>
         <a
           className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
-          href=""
+          href="https://chat.whatsapp.com/Icfir88VYt5EqhFXThaChA"
           target="_blank"
           rel="noreferrer noopener"
         >
           <FaWhatsapp aria-label="Whatsapp" size={20} />
         </a>
       </li>
-      <li>
+      {/* <li>
         <a
           className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
           href=""
@@ -38,11 +39,21 @@ export const SocialBar = () => {
         >
           <FaTelegram aria-label="Telegram" size={20} />
         </a>
+      </li> */}
+      <li>
+        <a
+          className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
+          href="https://discord.gg/eFFuZecjqR"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <FaDiscord aria-label="Telegram" size={20} />
+        </a>
       </li>
       <li>
         <a
           className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
-          href=""
+          href="https://twitter.com/otonelive"
           target="_blank"
           rel="noreferrer noopener"
         >
