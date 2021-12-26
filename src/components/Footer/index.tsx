@@ -11,7 +11,7 @@ import { Logo } from '../Logo'
 
 export const Footer = () => {
   return (
-    <footer className="border-gradient pt-[1px]">
+    <footer className="border-gradient pt-[1px] relative bottom-0 w-full">
       <div className="bg-base-background relative">
         <div className="flex flex-col md:flex-row md:flex-none gap-5 md:gap-0 justify-between items-center max-w-4xl mx-auto text-white py-4">
           <Link href="/">
@@ -78,7 +78,7 @@ export const Footer = () => {
           <nav>
             <ul className="flex items-center gap-10">
               <li>
-                <Link href="/sobre">
+                <Link href="/about">
                   <a className="underline font-semibold">Sobre nós</a>
                 </Link>
               </li>

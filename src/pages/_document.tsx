@@ -1,4 +1,7 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document'
+import { Footer } from '../components/Footer'
+import { Header } from '../components/Header'
+import SocialBar from '../components/SocialBar'
 
 export default class MyDocument extends Document {
   render(): JSX.Element {
@@ -18,8 +21,13 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body>
-          <Main />
+        <body className="relative bg-home bg-base-backgroundDark h-screen w-screen ">
+          <div className="min-h-screen w-screen flex flex-col justify-between">
+            <Header />
+            <SocialBar />
+            <Main />
+            <Footer />
+          </div>
           <NextScript />
         </body>
       </Html>
