@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body className="defaultBG">
+        <body>
           <Main />
           <NextScript />
         </body>

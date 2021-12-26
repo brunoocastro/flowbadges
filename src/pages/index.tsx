@@ -1,88 +1,134 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Router from 'next/router'
-import { useState } from 'react'
+import Link from 'next/link'
+import { HiOutlineArrowRight } from 'react-icons/hi'
+import {
+  FaGithub,
+  FaTwitch,
+  FaTwitter,
+  FaTelegram,
+  FaWhatsapp
+} from 'react-icons/fa'
+
+import { Logo } from '../components/Logo'
+import { Footer } from '../components/Footer'
 
 const Home: React.FC = () => {
-  const [inputAccount, setInputAccount] = useState('')
-
-  // const username = 'tonelive'
-  // const linkAccBadges = `https://flow3r-api-master-2eqj3fl3la-ue.a.run.app//v2/user/badges/${username}`
-
-  // const { data } = useFetch(linkAccBadges)
-
-  // console.log(data)
-  // const calculate = async (username: string) => {}
-
-  // if (!data) return <h1>Carregando</h1>
-  // else {
-  //   console.log(data)
-  // }
-
+  const links = [
+    {
+      title: 'Rank dos Emblemas',
+      description:
+        'Ranking com a raridade de cada emblema, baseado no Mercado de Trocas.',
+      href: '/ranking',
+      coverUrl: '/assets/rank-badges-cover.png'
+    },
+    {
+      title: 'Calcule sua Conta',
+      description:
+        'Descubra quanto vale sua conta em Sparks baseado nos seus emblemas resgatados.',
+      href: '/calcule-sua-conta',
+      coverUrl: '/assets/profile-stats-cover.png'
+    }
+  ]
   return (
-    <div>
+    <div className="bg-home bg-base-backgroundDark overflow-x-hidden">
       <Head>
         <title>Flow Badges</title>
       </Head>
 
-      <main className="h-screen w-screen flex ">
-        <div className="flex flex-col text-center w-3/4 h-4/10 bg-base-black rounded-3xl shadow-xl rounded-md self-center m-auto p-10">
-          <h1 className=" text-base-white text-3xl font-bold shadow-inner font-mono text-center sm:text-8xl">
-            Seja bem vindo ao
-          </h1>
-          <Image
-            className="shadow-xl"
-            src={'/assets/logo-green-white.svg'}
-            alt="Logo Flow Badges"
-            width="100%"
-            height="30%"
-            layout="responsive"
-            objectFit="contain"
-          />
-
-          <button
-            onClick={() => Router.push('/ranking')}
-            className="rounded-full font-mono text-xl mt-5 sm:text-2xl bg-blue-600 transition-all w-fit px-5 sm:px-10 py-2 m-auto hover:bg-blue-800 hover:text-base-yellow-400"
+      <ul className="fixed right-3 top-1/2 -translate-y-1/2 space-y-4">
+        <li>
+          <a
+            className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
+            href="https://github.com/brunoocastro/flowbadges"
+            target="_blank"
+            rel="noreferrer noopener"
           >
-            Ranking
-          </button>
-          {/* <h2 className="text-white text-center">
-          Vamos calcular o valor da sua conta:
-          </h2>
-          <div className="justify-self-center">
-          <input
-          className="align-center"
-          value={inputAccount}
-          onChange={event => setInputAccount(event.target.value)}
-          placeholder="Digite seu nick do flow"
-          />
-
-          <button
-          onClick={() => {
-            // calculate(inputAccount)
-          }}
-          className="bg-red-400 text-white rounded-sm"
+            <FaGithub aria-label="GitHub" size={20} />
+          </a>
+        </li>
+        <li>
+          <a
+            className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
+            href=""
+            target="_blank"
+            rel="noreferrer noopener"
           >
-          Calcular
-          </button>
+            <FaWhatsapp aria-label="Whatsapp" size={20} />
+          </a>
+        </li>
+        <li>
+          <a
+            className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
+            href=""
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <FaTelegram aria-label="Telegram" size={20} />
+          </a>
+        </li>
+        <li>
+          <a
+            className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
+            href=""
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <FaTwitter aria-label="Twitter" size={20} />
+          </a>
+        </li>
+        <li>
+          <a
+            className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
+            href="https://www.twitch.tv/tonelive"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <FaTwitch aria-label="Twitch" size={20} />
+          </a>
+        </li>
+      </ul>
 
-          <div className="flex flex-wrap gap-3 bg-white">
-          {data.badges.map(badge => (
-            <div key={badge.code} className="border-4">
-            <h1>Nome: {badge.code}</h1>
-            <Image
-            className="align-middle justify-center"
-            src={badge.src}
-            width={64}
-            height={64}
-            alt={badge.code}
-            />
-            </div>
-            ))}
-            </div>
-          </div> */}
+      <header className="rounded-br-lg rounded-bl-lg border-gradient max-w-[250px] mx-auto px-[1px] pb-[1px] relative">
+        <div className="absolute -inset-3 bg-base-yellow-700 rounded-lg blur opacity-10" />
+        <div className="relative bg-base-background max-w-[250px] mx-auto flex justify-center items-center rounded-br-lg py-4 rounded-bl-lg">
+          <Logo color="white" width="121" height="34" />
         </div>
+      </header>
+
+      <main className="h-screen w-screen grid place-items-center">
+        <nav>
+          <ul className="grid grid-cols-[289px_289px] gap-8">
+            {links.map(link => (
+              <li
+                key={link.href}
+                className="p-[2px] border-gradient-two rounded-lg relative"
+              >
+                <div className="absolute -inset-2 bg-base-yellow-700 rounded-lg blur opacity-10" />
+                <div className="relative bg-base-background rounded-lg p-5 text-center text-white">
+                  <Image
+                    src={link.coverUrl}
+                    width={249}
+                    height={171}
+                    quality={100}
+                    alt="Imagem com emblemas do flow"
+                  />
+                  <h2 className="my-8 text-lg font-semibold">{link.title}</h2>
+                  <p className="">{link.description}</p>
+                  <Link href={link.href}>
+                    <a className="border-gradient-two w-52 h-11 flex justify-center items-center gap-3 mt-10 rounded-lg mx-auto text-base-yellow-700">
+                      Acessar
+                      <HiOutlineArrowRight />
+                    </a>
+                  </Link>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </main>
+
+      <Footer />
     </div>
   )
 }

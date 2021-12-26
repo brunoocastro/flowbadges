@@ -26,7 +26,7 @@ const Ranking: React.FC = () => {
         <title>Ranking - Flow Badges</title>
       </Head>
 
-      <main className="h-screen w-screen flex justify-center overflow-auto">
+      <main className="flex justify-center">
         <div className="content-center sm:w-10/12 max-w-2xl ">
           <div className="m-5 p-3 rounded-xl bg-base-brown-700 w-8/10">
             <h1
