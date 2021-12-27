@@ -6,7 +6,7 @@ export const Search = () => {
           Mais Recentes
         </button>
         <button className="py-16 px-16 col-span-3 lg:col-span-1 rounded-md bg-slate-700">
-          Mais resgatados
+          Mais Raros
         </button>
         <input
           className="py-16 px-16 rounded-md col-span-6 lg:col-span-3 w-full h-full bg-slate-700"

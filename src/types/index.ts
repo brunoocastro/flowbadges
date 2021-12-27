@@ -1,21 +1,25 @@
 /* eslint-disable camelcase */
+export interface BadgeData {
+  name: string
+  code: string
+  src: string
+  high: string
+  description: string
+  created_at: string
+  hq: boolean
+  updated_at: string
+  starts_on: string
+  creator_profile_id: string
+  status: boolean
+  expires_at: string
+  count: number
+  badge_id: string
+  percentage_badge: number
+}
+
 export interface BadgesResponse {
-  badges?: {
-    hq: boolean
-    count: number
-    high: any
-    updated_at: string
-    code: string
-    starts_on: string
-    name: string
-    description: string
-    created_at: string
-    status: boolean
-    src: string
-    expires_at: string
-    badge_id: string
-    percentage_badge: number
-  }[]
-  status?: { error: string; message: string; reason: any }
-  total_badges?: number
+  badges: BadgeData[]
+  status: { error: string; message: string; reason?: string }
+  // eslint-disable-next-line camelcase
+  total_badges: number
 }

@@ -84,8 +84,8 @@ const Rank = () => {
           value={{
             selectedItem: thisBadge,
             show: show,
-            setSelectedItem: setThisBadge,
             setShow: setShow,
+            setSelectedItem: setThisBadge,
             toggle,
             rankingPosition
           }}
@@ -95,7 +95,7 @@ const Rank = () => {
             <div className="w-full">
               <Search />
               <div className="mt-16 grid grid-cols-1 sm:grid-cols-9 gap-[16px] mb-48">
-                <h2 className="col-span-full">Recomendados</h2>
+                <h2 className="col-span-full">Pódio</h2>
                 {data && (
                   <>
                     <LargeCard badges={badgeRanking} />
@@ -105,7 +105,7 @@ const Rank = () => {
               <div
                 className={`mt-16 grid grid-cols-1 sm:grid-cols-8 gap-[16px]`}
               >
-                <h2 className="col-span-full">Outras badges</h2>
+                <h2 className="col-span-full">Todas badges</h2>
                 {data && (
                   <>
                     <SmallCard badges={badgeRanking} />

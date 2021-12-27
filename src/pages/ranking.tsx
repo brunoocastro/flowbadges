@@ -5,43 +5,19 @@ import Router from 'next/router'
 import { useMemo, useState } from 'react'
 import BaseModal from '../components/Modal'
 import { useFetch } from '../hooks/useFetch'
-
-export interface badgeData {
-  name: string
-  code: string
-  src: string
-  high: string
-  description: string
-  created_at: string
-  hq: boolean
-  updated_at: string
-  starts_on: string
-  creator_profile_id: string
-  status: boolean
-  expires_at: string
-  count: number
-  badge_id: string
-  percentage_badge: number
-}
-
-interface badgesResponse {
-  badges: badgeData[]
-  status: { error: string; message: string; reason?: string }
-  // eslint-disable-next-line camelcase
-  total_badges: number
-}
+import { BadgeData, BadgesResponse } from '../types'
 
 const Ranking: React.FC = () => {
   const getAllBadges =
     'https://stickers-flow3r-2eqj3fl3la-ue.a.run.app/v1/badges?sort=desc'
 
-  const { data } = useFetch<badgesResponse>(getAllBadges)
+  const { data } = useFetch<BadgesResponse>(getAllBadges)
   const badgeRanking = useMemo(() => {
     return (data && data.badges.sort((a, b) => a.count - b.count)) || []
   }, [data])
 
   const [showModal, setShowModal] = useState(false)
-  const [badgeToModal, setBadgeToModal] = useState<badgeData>({
+  const [badgeToModal, setBadgeToModal] = useState<BadgeData>({
     name: '',
     code: '',
     src: '',
@@ -61,7 +37,7 @@ const Ranking: React.FC = () => {
   const [rankingPosition, setRankingPosition] = useState(0)
   const [maxPercentBadge, setMaxPercentBadge] = useState(1.26)
 
-  const setBadgeModalData = (badge: badgeData, position: number) => {
+  const setBadgeModalData = (badge: BadgeData, position: number) => {
     setBadgeToModal(badge)
     setRankingPosition(position)
     setShowModal(true)
