@@ -11,7 +11,7 @@ import { LargeCard } from '../../components/LargeCard'
 import { SmallCard } from '../../components/SmallCard'
 import { Search } from '../../components/Search'
 import { BadgesResponse } from '../../types'
-import { CopyCode } from '../../components/common/CopyToClipboard'
+import { ArrowFunction } from 'typescript'
 
 interface BadgeContextProps {
   selectedItem: string
@@ -19,6 +19,8 @@ interface BadgeContextProps {
   setShow: Dispatch<SetStateAction<boolean>>
   setSelectedItem: Dispatch<SetStateAction<string>>
   toggle: (code: string) => void
+  filterFunction: ArrowFunction
+  setFilterFunction: Dispatch<SetStateAction<ArrowFunction>>
 }
 
 export const BadgeContext = createContext<BadgeContextProps>(
@@ -28,6 +30,8 @@ export const BadgeContext = createContext<BadgeContextProps>(
 const Rank = () => {
   const [thisBadge, setThisBadge] = useState('')
   const [show, setShow] = useState(false)
+
+  const [filterFunction, setFilterFunction] = useState()
 
   const toggle = useCallback(
     code => {
@@ -45,6 +49,10 @@ const Rank = () => {
   // const badgesList = useMemo(() => data?.badges, [data])
   const badgesList = data?.badges
 
+  const badgesOrderedList = badgesList?.sort((a, b) => {
+    return a.count - b.count
+  })
+
   return (
     <>
       <main className="h-screen w-screen flex flex-wrap justify-center overflow-x-hidden">
@@ -54,10 +62,11 @@ const Rank = () => {
             show: show,
             setShow: setShow,
             setSelectedItem: setThisBadge,
-            toggle
+            toggle,
+            filterFunction: filterFunction,
+            setFilterFunction: setFilterFunction
           }}
         >
-          <CopyCode item={thisBadge} show={show} />
           <div className="content-center sm:w-10/12 max-w-4xl text-slate-100 p-16">
             <div className="w-full">
               <Search />
