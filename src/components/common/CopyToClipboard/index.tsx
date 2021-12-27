@@ -19,9 +19,11 @@ export const CopyCode = ({ item, show = false }: CopyCodeProps) => {
   return (
     <ClassicModal
       title="Código"
-      body={(
-        <>O código <span className="font-medium">#{item}</span> foi copiado.</>
-      )}
+      body={
+        <>
+          O código <span className="font-medium">#{item}</span> foi copiado.
+        </>
+      }
       show={state}
       closeModal={() => setState(prevState => !prevState)}
     />

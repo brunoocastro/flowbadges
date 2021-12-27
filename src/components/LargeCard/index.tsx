@@ -7,7 +7,7 @@ import { CopyIcon } from '../common/Copy Icon'
 import { CopyCode } from '../common/CopyToClipboard'
 
 export const LargeCard = ({ badges }: BadgesResponse) => {
-  const { setSelectedItem, toggle } = useContext(BadgeContext)
+  const { setSelectedItem, toggle, rankingPosition } = useContext(BadgeContext)
 
   return (
     <>

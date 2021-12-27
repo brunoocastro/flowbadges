@@ -1,5 +1,4 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document'
-import FooterCP from '../components/footer'
 
 export default class MyDocument extends Document {
   render(): JSX.Element {
@@ -18,7 +17,6 @@ export default class MyDocument extends Document {
         <body className="defaultBG">
           <Main />
           <NextScript />
-          {/* <FooterCP /> */}
         </body>
       </Html>
     )
