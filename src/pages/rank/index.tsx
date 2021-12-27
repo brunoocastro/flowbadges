@@ -4,7 +4,6 @@ import {
   Dispatch,
   SetStateAction,
   useCallback,
-  useMemo,
   useState
 } from 'react'
 import { useFetch } from '../../hooks/useFetch'
@@ -20,7 +19,6 @@ interface BadgeContextProps {
   setShow: Dispatch<SetStateAction<boolean>>
   setSelectedItem: Dispatch<SetStateAction<string>>
   toggle: (code: string) => void
-  rankingPosition: number
 }
 
 export const BadgeContext = createContext<BadgeContextProps>(
@@ -44,39 +42,9 @@ const Rank = () => {
     'https://stickers-flow3r-2eqj3fl3la-ue.a.run.app/v1/badges?sort=desc'
 
   const { data } = useFetch<BadgesResponse>(getAllBadges)
-  const badgeRanking = useMemo(() => {
-    return data && data.badges.sort((a, b) => a.count - b.count)
-  }, [data])
+  // const badgesList = useMemo(() => data?.badges, [data])
+  const badgesList = data?.badges
 
-  const [showModal, setShowModal] = useState(false)
-  const [badgeToModal, setBadgeToModal] = useState<badgeData>({
-    name: '',
-    code: '',
-    src: '',
-    high: '',
-    description: '',
-    created_at: '',
-    hq: false,
-    updated_at: '',
-    starts_on: '',
-    creator_profile_id: '',
-    status: false,
-    expires_at: '',
-    count: 0,
-    badge_id: '',
-    percentage_badge: 0
-  })
-  const [rankingPosition, setRankingPosition] = useState(0)
-  const [maxPercentBadge, setMaxPercentBadge] = useState(1.26)
-
-  const setBadgeModalData = (badge: badgeData, position: number) => {
-    setBadgeToModal(badge)
-    setRankingPosition(position)
-    setShowModal(true)
-    data && setMaxPercentBadge(data?.badges[-1]?.percentage_badge || 1.26)
-  }
-
-  console.log('app', BadgeContext.displayName)
   return (
     <>
       <main className="h-screen w-screen flex flex-wrap justify-center overflow-x-hidden">
@@ -86,8 +54,7 @@ const Rank = () => {
             show: show,
             setShow: setShow,
             setSelectedItem: setThisBadge,
-            toggle,
-            rankingPosition
+            toggle
           }}
         >
           <CopyCode item={thisBadge} show={show} />
@@ -98,7 +65,7 @@ const Rank = () => {
                 <h2 className="col-span-full">Pódio</h2>
                 {data && (
                   <>
-                    <LargeCard badges={badgeRanking} />
+                    <LargeCard badges={badgesList} />
                   </>
                 )}
               </div>
@@ -108,7 +75,7 @@ const Rank = () => {
                 <h2 className="col-span-full">Todas badges</h2>
                 {data && (
                   <>
-                    <SmallCard badges={badgeRanking} />
+                    <SmallCard badges={badgesList} />
                   </>
                 )}
               </div>

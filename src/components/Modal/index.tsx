@@ -1,15 +1,15 @@
 /* eslint-disable camelcase */
 import Image from 'next/image'
-import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
+import { Dispatch, SetStateAction, useMemo } from 'react'
 import { useFetch } from '../../hooks/useFetch'
-import { badgeData } from '../../pages/ranking'
+import { BadgeData } from '../../types'
 import verifyPodcast from '../../utils/verifyPodcast'
 
 interface ModalProps {
   show: boolean
   setShow: Dispatch<SetStateAction<boolean>>
   position: number
-  badge: badgeData
+  badge: BadgeData
   maxPercentBadge: number
 }
 

@@ -1,8 +1,7 @@
 import Image from 'next/image'
-import { BadgesResponse } from '../../types'
 import CopyBadgeCode from '../../patterns/CopyBadgeCode'
 
-export const SmallCard = ({ badges }: BadgesResponse) => {
+export const SmallCard = ({ badges }) => {
   return (
     <>
       {badges

@@ -1,9 +1,8 @@
 /* eslint-disable camelcase */
 import Image from 'next/image'
 import CopyBadgeCode from '../../patterns/CopyBadgeCode'
-import { BadgesResponse } from '../../types'
 
-export const LargeCard = ({ badges }: BadgesResponse) => {
+export const LargeCard = ({ badges }) => {
   return (
     <>
       {badges
