@@ -12,9 +12,9 @@ export const LargeCard = ({ badges }) => {
           return (
             <section
               key={badge.code}
-              className="p-16 col-span-3 grid grid-cols-1 gap-y-[16px] bg-slate-800 rounded-md"
+              className="p-16 col-span-3 gap-y-[16px] bg-slate-800 rounded-md"
             >
-              <div className="bg-yellow-300 hover:opacity-75 w-full rounded-md cursor-pointe relative">
+              <div className="bg-yellow-300 hover:opacity-75 w-full h-fit mb-16 rounded-md cursor-pointe relative">
                 <Image
                   src={badge.high || badge.src}
                   width="100"

@@ -83,7 +83,7 @@ const Ranking: React.FC = () => {
                     shadow-xl text-left text-base-black"
                   onClick={() => setBadgeModalData(badge, index + 1)}
                 >
-                  <div className="h-max w-20 md:w-24 bg-transparent z-10  flex origin-right col-span-2">
+                  <div className="h-max w-20 md:w-24 bg-transparent z-10 flex origin-right col-span-2">
                     <Image
                       src={badge.src}
                       width="100%"
@@ -94,7 +94,7 @@ const Ranking: React.FC = () => {
                       }
                     />
                   </div>
-                  <div className="flex flex-col justify-between col-span-7 font-mono ">
+                  <div className="flex flex-col justify-between col-span-7 font-mono">
                     <div className="flex items-center">
                       <h1 className="font-sans text-lg">Nome:</h1>
                       <h2 className="px-2 text-base truncate">{badge.name}</h2>

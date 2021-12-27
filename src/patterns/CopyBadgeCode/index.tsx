@@ -1,5 +1,4 @@
-import { ReactElement, useContext } from 'react'
-import { BadgeContext } from '../../pages/rank'
+import { ReactElement } from 'react'
 import { CopyIcon } from '@radix-ui/react-icons'
 import { toast } from 'react-hot-toast'
 
@@ -13,7 +12,8 @@ const CopyBadgeCode = (props: CopyBadgeCodeProps): ReactElement => {
   return (
     <>
       <button
-        className="rounded-md overflow-hidden bg-slate-600 hover:bg-slate-700 hover:stroke-yellow-500 transition-all duration-75 border-yellow-50 col-span-3 grid grid-cols-4"
+        className="rounded-md overflow-hidden bg-slate-600 hover:bg-slate-700 hover:stroke-yellow-500
+        transition-all duration-75 border-yellow-50 col-span-3 grid grid-cols-4"
         onClick={() => {
           toast.success(`O código "${code}" foi copiado!`)
         }}
