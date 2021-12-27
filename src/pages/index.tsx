@@ -2,6 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Router from 'next/router'
 import { useState } from 'react'
+import FooterCP from '../components/footer'
+import BaseModal from '../components/Modal'
 
 const Home: React.FC = () => {
   const [inputAccount, setInputAccount] = useState('')
@@ -25,7 +27,7 @@ const Home: React.FC = () => {
         <title>Flow Badges</title>
       </Head>
 
-      <main className="h-screen w-screen flex ">
+      <main className="h-screen w-screen flex flex-col ">
         <div className="flex flex-col text-center w-3/4 h-4/10 bg-base-black rounded-3xl shadow-xl rounded-md self-center m-auto p-10">
           <h1 className=" text-base-white text-3xl font-bold shadow-inner font-mono text-center sm:text-8xl">
             Seja bem vindo ao
@@ -46,6 +48,8 @@ const Home: React.FC = () => {
           >
             Ranking
           </button>
+
+          {/* <FooterCP /> */}
           {/* <h2 className="text-white text-center">
           Vamos calcular o valor da sua conta:
           </h2>
@@ -82,6 +86,7 @@ const Home: React.FC = () => {
             </div>
           </div> */}
         </div>
+        <FooterCP />
       </main>
     </div>
   )

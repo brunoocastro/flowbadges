@@ -1,12 +1,32 @@
+/* eslint-disable camelcase */
 import Head from 'next/head'
 import Image from 'next/image'
 import Router from 'next/router'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
+import BaseModal from '../components/Modal'
 import { useFetch } from '../hooks/useFetch'
 
+export interface badgeData {
+  name: string
+  code: string
+  src: string
+  high: string
+  description: string
+  created_at: string
+  hq: boolean
+  updated_at: string
+  starts_on: string
+  creator_profile_id: string
+  status: boolean
+  expires_at: string
+  count: number
+  badge_id: string
+  percentage_badge: number
+}
+
 interface badgesResponse {
-  badges: any[]
-  status: { error: string; message: string; reason: any }
+  badges: badgeData[]
+  status: { error: string; message: string; reason?: string }
   // eslint-disable-next-line camelcase
   total_badges: number
 }
@@ -20,6 +40,34 @@ const Ranking: React.FC = () => {
     return (data && data.badges.sort((a, b) => a.count - b.count)) || []
   }, [data])
 
+  const [showModal, setShowModal] = useState(false)
+  const [badgeToModal, setBadgeToModal] = useState<badgeData>({
+    name: '',
+    code: '',
+    src: '',
+    high: '',
+    description: '',
+    created_at: '',
+    hq: false,
+    updated_at: '',
+    starts_on: '',
+    creator_profile_id: '',
+    status: false,
+    expires_at: '',
+    count: 0,
+    badge_id: '',
+    percentage_badge: 0
+  })
+  const [rankingPosition, setRankingPosition] = useState(0)
+  const [maxPercentBadge, setMaxPercentBadge] = useState(1.26)
+
+  const setBadgeModalData = (badge: badgeData, position: number) => {
+    setBadgeToModal(badge)
+    setRankingPosition(position)
+    setShowModal(true)
+    data && setMaxPercentBadge(data?.badges[-1]?.percentage_badge || 1.26)
+  }
+
   return (
     <div>
       <Head>
@@ -27,6 +75,15 @@ const Ranking: React.FC = () => {
       </Head>
 
       <main className="h-screen w-screen flex justify-center overflow-auto">
+        {showModal && (
+          <BaseModal
+            badge={badgeToModal}
+            show={showModal}
+            setShow={setShowModal}
+            position={rankingPosition}
+            maxPercentBadge={maxPercentBadge}
+          />
+        )}
         <div className="content-center sm:w-10/12 max-w-2xl ">
           <div className="m-5 p-3 rounded-xl bg-base-brown-700 w-8/10">
             <h1
@@ -43,20 +100,22 @@ const Ranking: React.FC = () => {
                 <div
                   key={badge.code}
                   className="
-                    grid
-                    grid-rows-1
-                    grid-cols-10
+                    grid grid-rows-1 grid-cols-10
                     w-full mx-auto space-x-1
                   bg-gray-100 rounded-lg p-3
                     border border-gray-500/50
-                    shadow-xl text-left"
+                    shadow-xl text-left text-base-black"
+                  onClick={() => setBadgeModalData(badge, index + 1)}
                 >
-                  <div className="h-max w-24 bg-transparent  flex origin-right col-span-2">
+                  <div className="h-max w-20 md:w-24 bg-transparent z-10  flex origin-right col-span-2">
                     <Image
                       src={badge.src}
                       width="100%"
                       height="100%"
                       alt={badge.name}
+                      onClick={() =>
+                        window.open(badge.high || badge.src, '_blank')
+                      }
                     />
                   </div>
                   <div className="flex flex-col justify-between col-span-7 font-mono ">
@@ -77,11 +136,11 @@ const Ranking: React.FC = () => {
                     <h1
                       className={`
                       text-base-black
-                      ${index + 1 === 1 && 'text-yellow-500'}
-                      ${index + 1 === 2 && 'text-gray-400'}
-                      ${index + 1 === 3 && 'text-orange-600'}
+                      ${index + 1 === 1 && 'text-metal-gold'}
+                      ${index + 1 === 2 && 'text-metal-iron'}
+                      ${index + 1 === 3 && 'text-metal-bronze'}
                       h-fit text-4xl
-                       italic antialiased`}
+                      italic antialiased`}
                     >
                       {index + 1}º
                     </h1>
