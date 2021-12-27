@@ -13,7 +13,7 @@ const CopyBadgeCode = (props: CopyBadgeCodeProps): ReactElement => {
     <>
       <button
         className="rounded-md overflow-hidden bg-slate-600 hover:bg-slate-700 hover:stroke-yellow-500
-        transition-all duration-75 border-yellow-50 col-span-3 grid grid-cols-4"
+        transition-all duration-75 border-yellow-50 col-span-3 grid grid-cols-4 border-2"
         onClick={() => {
           toast.success(`O código "${code}" foi copiado!`)
         }}
