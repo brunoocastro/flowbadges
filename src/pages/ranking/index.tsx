@@ -11,7 +11,7 @@ import { LargeCard } from '../../components/LargeCard'
 import { SmallCard } from '../../components/SmallCard'
 import { Search } from '../../components/Search'
 import { BadgesResponse } from '../../types'
-import { ArrowFunction } from 'typescript'
+import filters from '../../constants/filters'
 
 interface BadgeContextProps {
   selectedItem: string
@@ -19,8 +19,8 @@ interface BadgeContextProps {
   setShow: Dispatch<SetStateAction<boolean>>
   setSelectedItem: Dispatch<SetStateAction<string>>
   toggle: (code: string) => void
-  filterFunction: ArrowFunction
-  setFilterFunction: Dispatch<SetStateAction<ArrowFunction>>
+  orderingMode: string
+  setOrderingMode: Dispatch<SetStateAction<string>>
 }
 
 export const BadgeContext = createContext<BadgeContextProps>(
@@ -31,7 +31,7 @@ const Rank = () => {
   const [thisBadge, setThisBadge] = useState('')
   const [show, setShow] = useState(false)
 
-  const [filterFunction, setFilterFunction] = useState()
+  const [orderingMode, setOrderingMode] = useState(filters.byRarity.code)
 
   const toggle = useCallback(
     code => {
@@ -49,9 +49,17 @@ const Rank = () => {
   // const badgesList = useMemo(() => data?.badges, [data])
   const badgesList = data?.badges
 
-  const badgesOrderedList = badgesList?.sort((a, b) => {
-    return a.count - b.count
-  })
+  const badgesOrderedList = badgesList?.sort(
+    orderingMode === filters.byRarity.code
+      ? filters.byRarity.filterFunction
+      : filters.byDate.filterFunction
+  )
+  // const badgesOrderedList = badgesList?.sort((a, b) => {
+  //   return a.count - b.count
+  // })
+  console.log(badgesList)
+
+  console.log('badgesOrderedList', badgesOrderedList)
 
   return (
     <>
@@ -63,8 +71,8 @@ const Rank = () => {
             setShow: setShow,
             setSelectedItem: setThisBadge,
             toggle,
-            filterFunction: filterFunction,
-            setFilterFunction: setFilterFunction
+            orderingMode: orderingMode,
+            setOrderingMode: setOrderingMode
           }}
         >
           <div className="content-center sm:w-10/12 max-w-4xl text-slate-100 p-16">
