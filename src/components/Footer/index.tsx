@@ -7,8 +7,6 @@ const textButtons = [
   ['Ferramentas', '/']
 ]
 
-const iconButtons = []
-
 const FooterCP: React.FC = () => (
   <footer className="relative flex justify-around align-middle flex-col bg-base-blue-700 w-full h-24 bottom-0">
     <div className="my-auto flex justify-around align-middle content-center text-justify ">

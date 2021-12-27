@@ -1,38 +1,73 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Router from 'next/router'
+import Link from 'next/link'
+import { HiOutlineArrowRight } from 'react-icons/hi'
 
 const Home: React.FC = () => {
+  const links = [
+    {
+      title: 'Rank dos Emblemas',
+      description:
+        'Ranking com a raridade de cada emblema, baseado no Mercado de Trocas.',
+      href: '/ranking',
+      coverUrl: '/assets/rank-badges-cover.png'
+    },
+    // {
+    //   title: 'Calcule sua Conta',
+    //   description:
+    //     'Descubra quanto vale sua conta em Sparks baseado nos seus emblemas resgatados.',
+    //   href: '/calcule-sua-conta',
+    //   coverUrl: '/assets/profile-stats-cover.png'
+    // }
+    {
+      title: 'Discord',
+      description:
+        'Entre no nosso discord, faça parte da comunidade e ajude na construção dessa plataforma',
+      href: 'https://discord.gg/eFFuZecjqR',
+      coverUrl: '/assets/profile-stats-cover.png'
+    }
+  ]
+
   return (
-    <div>
-      <Head>
-        <title>Flow Badges</title>
-      </Head>
+    <>
+      <div>
+        <Head>
+          <title>Flow Badges</title>
+        </Head>
 
-      <main className="h-screen w-screen flex flex-col ">
-        <div className="flex flex-col text-center w-3/4 h-4/10 bg-base-black rounded-3xl shadow-xl self-center m-auto p-10">
-          <h1 className=" text-base-white text-3xl font-bold shadow-inner font-mono text-center sm:text-8xl">
-            Seja bem vindo ao
-          </h1>
-          <Image
-            className="shadow-xl"
-            src={'/assets/logo-green-white.svg'}
-            alt="Logo Flow Badges"
-            width="100%"
-            height="30%"
-            layout="responsive"
-            objectFit="contain"
-          />
-
-          <button
-            onClick={() => Router.push('/ranking')}
-            className="rounded-full font-mono text-xl mt-5 sm:text-2xl bg-blue-600 transition-all w-fit px-5 sm:px-10 py-2 m-auto hover:bg-blue-800 hover:text-base-yellow-400"
-          >
-            Ranking
-          </button>
-        </div>
-      </main>
-    </div>
+        <main className="w-full h-full grid place-items-center mt-10 md:mt-0 mb-10 ">
+          <nav>
+            <ul className="grid grid-cols-[289px] md:grid-cols-[289px_289px] gap-8">
+              {links.map(link => (
+                <li
+                  key={link.href}
+                  className="p-[2px] border-gradient-two rounded-lg relative"
+                >
+                  <div className="absolute -inset-2 bg-base-yellow-700 rounded-lg blur opacity-10" />
+                  <div className="relative h-full bg-base-background rounded-lg p-5 text-center">
+                    <Image
+                      src={link.coverUrl}
+                      width={249}
+                      height={171}
+                      quality={100}
+                      alt="Imagem com emblemas do flow"
+                    />
+                    <h2 className="my-8 text-lg font-semibold">{link.title}</h2>
+                    <p className="">{link.description}</p>
+                    <Link href={link.href}>
+                      <a className="border-gradient-two w-52 h-11 flex justify-center items-center gap-3 mt-10 rounded-lg mx-auto text-base-yellow-700">
+                        Acessar
+                        <HiOutlineArrowRight />
+                      </a>
+                    </Link>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </main>
+      </div>
+    </>
   )
 }
 
