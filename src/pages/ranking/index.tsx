@@ -4,6 +4,7 @@ import {
   Dispatch,
   SetStateAction,
   useCallback,
+  useMemo,
   useState
 } from 'react'
 import { useFetch } from '../../hooks/useFetch'
@@ -21,6 +22,8 @@ interface BadgeContextProps {
   toggle: (code: string) => void
   orderingMode: string
   setOrderingMode: Dispatch<SetStateAction<string>>
+  searchText: string
+  setSearchText: Dispatch<SetStateAction<string>>
 }
 
 export const BadgeContext = createContext<BadgeContextProps>(
@@ -32,6 +35,7 @@ const Rank = () => {
   const [show, setShow] = useState(false)
 
   const [orderingMode, setOrderingMode] = useState(filters.byRarity.code)
+  const [searchText, setSearchText] = useState('')
 
   const toggle = useCallback(
     code => {
@@ -49,17 +53,22 @@ const Rank = () => {
   // const badgesList = useMemo(() => data?.badges, [data])
   const badgesList = data?.badges
 
-  const badgesOrderedList = badgesList?.sort(
+  const badgesOrdered = badgesList?.sort(
     orderingMode === filters.byRarity.code
       ? filters.byRarity.filterFunction
       : filters.byDate.filterFunction
   )
-  // const badgesOrderedList = badgesList?.sort((a, b) => {
-  //   return a.count - b.count
-  // })
-  console.log(badgesList)
 
-  console.log('badgesOrderedList', badgesOrderedList)
+  const badgesOnSearch =
+    (searchText &&
+      badgesOrdered?.filter(({ code, name, description }) => {
+        return (
+          code.toLowerCase().includes(searchText.toLowerCase()) ||
+          name.toLowerCase().includes(searchText.toLowerCase()) ||
+          description.toLowerCase().includes(searchText.toLowerCase())
+        )
+      })) ||
+    []
 
   return (
     <>
@@ -72,30 +81,49 @@ const Rank = () => {
             setSelectedItem: setThisBadge,
             toggle,
             orderingMode: orderingMode,
-            setOrderingMode: setOrderingMode
+            setOrderingMode: setOrderingMode,
+            searchText: searchText,
+            setSearchText: setSearchText
           }}
         >
           <div className="content-center sm:w-10/12 max-w-4xl text-slate-100 p-16">
             <div className="w-full">
               <Search />
-              <div className="mt-16 grid grid-cols-1 sm:grid-cols-9 gap-[16px] mb-48">
-                <h2 className="col-span-full">Pódio</h2>
-                {data && (
-                  <>
-                    <LargeCard badges={badgesList} />
-                  </>
-                )}
-              </div>
-              <div
-                className={`mt-16 grid grid-cols-1 sm:grid-cols-8 gap-[16px]`}
-              >
-                <h2 className="col-span-full">Todas badges</h2>
-                {data && (
-                  <>
-                    <SmallCard badges={badgesList} />
-                  </>
-                )}
-              </div>
+              {searchText === '' ? (
+                <>
+                  <div className="mt-16 grid grid-cols-1 sm:grid-cols-9 gap-[16px] mb-48">
+                    <h2 className="col-span-full">Pódio</h2>
+                    {data && (
+                      <>
+                        <LargeCard badges={badgesList} />
+                      </>
+                    )}
+                  </div>
+                  <div
+                    className={`mt-16 grid grid-cols-1 sm:grid-cols-8 gap-[16px]`}
+                  >
+                    <h2 className="col-span-full">Todas badges</h2>
+                    {data && (
+                      <>
+                        <SmallCard badges={badgesList} />
+                      </>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <div
+                  className={`mt-16 grid grid-cols-1 sm:grid-cols-8 gap-[16px]`}
+                >
+                  <h2 className="col-span-full">
+                    Pesquisando por {'"' + searchText + '"'}
+                  </h2>
+                  {data && (
+                    <>
+                      <SmallCard badges={badgesOnSearch} />
+                    </>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </BadgeContext.Provider>

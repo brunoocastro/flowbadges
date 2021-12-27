@@ -1,19 +1,16 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import filters from '../../constants/filters'
 import { BadgeContext } from '../../pages/ranking'
 
 export const Search = () => {
-  // const [orderingMode, setOrderingMode] = useState(filters.byRarity.code)
-
-  const { orderingMode, setOrderingMode } = useContext(BadgeContext)
+  const { orderingMode, setOrderingMode, searchText, setSearchText } =
+    useContext(BadgeContext)
 
   const setRarityOrder = () => {
-    // setFilterFunction(filters.byRarity.filterFunction)
     setOrderingMode(filters.byRarity.code)
   }
 
   const setDateOrder = () => {
-    // setFilterFunction(filters.byDate.filterFunction)
     setOrderingMode(filters.byDate.code)
   }
 
@@ -46,6 +43,8 @@ export const Search = () => {
         <input
           className="py-16 px-16 rounded-md col-span-6 lg:col-span-3 w-full h-full bg-slate-700"
           type="text"
+          value={searchText}
+          onChange={e => setSearchText(e.target.value)}
           placeholder="Procurar badges"
         />
       </div>
