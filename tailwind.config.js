@@ -5,6 +5,10 @@ module.exports = {
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}'
   ],
+  plugins: [require('tailwind-scrollbar')],
+  variants: {
+      scrollbar: ['rounded']
+  },
   theme: {
     keyframes: {
       modalBgShow: {
@@ -82,10 +86,17 @@ module.exports = {
           brown: {
             400: '#805C04',
             700: '#332502'
+          },
+          blue: {
+            700: '#1E293B'
           }
+        },
+        metal: {
+          gold: '#FFD700',
+          iron: '#C0C0C0',
+          bronze: '#9c5221'
         }
       }
     }
-  },
-  plugins: []
+  }
 }

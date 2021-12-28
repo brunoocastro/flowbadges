@@ -6,6 +6,7 @@ import {
   FaWhatsapp,
   FaDiscord
 } from 'react-icons/fa'
+import socialLinks from '../../constants/social'
 
 export const SocialBar = () => {
   return (
@@ -13,7 +14,7 @@ export const SocialBar = () => {
       <li>
         <a
           className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
-          href="https://github.com/brunoocastro/flowbadges"
+          href={socialLinks.github}
           target="_blank"
           rel="noreferrer noopener"
         >
@@ -23,7 +24,7 @@ export const SocialBar = () => {
       <li>
         <a
           className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
-          href="https://chat.whatsapp.com/Icfir88VYt5EqhFXThaChA"
+          href={socialLinks.whatsapp}
           target="_blank"
           rel="noreferrer noopener"
         >
@@ -43,7 +44,7 @@ export const SocialBar = () => {
       <li>
         <a
           className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
-          href="https://discord.gg/eFFuZecjqR"
+          href={socialLinks.discord}
           target="_blank"
           rel="noreferrer noopener"
         >
@@ -53,7 +54,7 @@ export const SocialBar = () => {
       <li>
         <a
           className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
-          href="https://twitter.com/otonelive"
+          href={socialLinks.twitter}
           target="_blank"
           rel="noreferrer noopener"
         >
@@ -63,7 +64,7 @@ export const SocialBar = () => {
       <li>
         <a
           className="bg-white w-8 h-8 rounded-full flex justify-center items-center"
-          href="https://www.twitch.tv/tonelive"
+          href={socialLinks.twitch}
           target="_blank"
           rel="noreferrer noopener"
         >

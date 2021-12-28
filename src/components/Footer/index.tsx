@@ -9,7 +9,7 @@ import {
 
 import { Logo } from '../Logo'
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <footer className="border-gradient pt-[1px] relative bottom-0 w-full">
       <div className="bg-base-background relative">
@@ -99,3 +99,5 @@ export const Footer = () => {
     </footer>
   )
 }
+
+export default Footer
