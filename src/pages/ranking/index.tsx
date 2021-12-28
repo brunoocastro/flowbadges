@@ -115,7 +115,7 @@ const Rank = () => {
                   className={`mt-16 grid grid-cols-1 sm:grid-cols-8 gap-[16px]`}
                 >
                   <h2 className="col-span-full">
-                    Pesquisando por {'"' + searchText + '"'}
+                    Pesquisando por &#34;{searchText}&#34;
                   </h2>
                   {data && (
                     <>
