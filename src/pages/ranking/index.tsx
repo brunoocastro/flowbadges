@@ -62,11 +62,13 @@ const Rank = () => {
 
   const badgesOnSearch =
     (searchText &&
-      badgesOrdered?.filter(({ code, name, description }) => {
+      badgesOrdered?.filter(({ code, name, description, src, high }) => {
         return (
           code.toLowerCase().includes(searchText.toLowerCase()) ||
           name.toLowerCase().includes(searchText.toLowerCase()) ||
-          description.toLowerCase().includes(searchText.toLowerCase())
+          description.toLowerCase().includes(searchText.toLowerCase()) ||
+          src?.toLowerCase().includes(searchText.toLowerCase()) ||
+          high?.toLowerCase().includes(searchText.toLowerCase())
         )
       })) ||
     []
