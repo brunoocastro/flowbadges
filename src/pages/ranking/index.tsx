@@ -13,6 +13,7 @@ import { SmallCard } from '../../components/SmallCard'
 import { Search } from '../../components/Search'
 import { BadgesResponse } from '../../types'
 import filters from '../../constants/filters'
+import Head from 'next/head'
 
 interface BadgeContextProps {
   selectedItem: string
@@ -72,6 +73,9 @@ const Rank = () => {
 
   return (
     <>
+      <Head>
+        <title>Ranking - Flow Badges</title>
+      </Head>
       <main className="min-h-fit w-screen flex flex-wrap justify-center overflow-x-hidden">
         <BadgeContext.Provider
           value={{
