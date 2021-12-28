@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Logo } from '../Logo'
 
-export const Header = () => {
+const Header = () => {
   return (
     <header className="relative top-0 right-0 left-0 w-full rounded-br-lg rounded-bl-lg border-gradient max-w-[250px] mx-auto px-[1px] pb-[1px] cursor-pointer">
       <Link href={'/'} passHref>
@@ -15,3 +15,5 @@ export const Header = () => {
     </header>
   )
 }
+
+export default Header

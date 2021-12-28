@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { HiOutlineArrowRight } from 'react-icons/hi'
+import socialLinks from '../constants/social'
 
 const Home: React.FC = () => {
   const links = [
@@ -23,7 +24,7 @@ const Home: React.FC = () => {
       title: 'Discord',
       description:
         'Entre no nosso discord, faça parte da comunidade e ajude na construção dessa plataforma',
-      href: 'https://discord.gg/eFFuZecjqR',
+      href: socialLinks.discord,
       coverUrl: '/assets/profile-stats-cover.png'
     }
   ]
@@ -55,7 +56,7 @@ const Home: React.FC = () => {
                     <h2 className="my-8 text-lg font-semibold">{link.title}</h2>
                     <p className="">{link.description}</p>
                     <Link href={link.href}>
-                      <a className="border-gradient-two w-52 h-11 flex justify-center items-center gap-3 mt-10 rounded-lg mx-auto text-base-yellow-700">
+                      <a className="border-gradient-two w-52 h-11 flex justify-center items-center gap-3 mt-10 rounded-lg mx-auto text-base-yellow-700 text-lg duration-150 hover:text-xl">
                         Acessar
                         <HiOutlineArrowRight />
                       </a>

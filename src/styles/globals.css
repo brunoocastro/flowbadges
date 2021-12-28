@@ -34,3 +34,15 @@
       linear-gradient(213.04deg, #ffc332 0%, rgba(254, 194, 50, 0.3) 100%);
   }
 }
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
