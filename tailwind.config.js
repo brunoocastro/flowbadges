@@ -5,6 +5,10 @@ module.exports = {
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}'
   ],
+  plugins: [require('tailwind-scrollbar')],
+  variants: {
+      scrollbar: ['rounded']
+  },
   theme: {
     keyframes: {
       modalBgShow: {
@@ -43,14 +47,6 @@ module.exports = {
       modalPanelOut: 'modalPanelOut 200ms ease-in'
     },
     extend: {
-      // spacing: {
-      //   4: '0.25rem',
-      //   8: '0.5rem',
-      //   16: '1rem',
-      //   32: '2rem',
-      //   48: '2.5rem',
-      //   5: '36rem'
-      // },
       backgroundImage: {
         pattern: `url('/assets/fbPattern.svg')`,
         home: `url('/assets/home-background.png')`
@@ -92,16 +88,15 @@ module.exports = {
             700: '#332502'
           },
           blue: {
-            700: "#1E293B"
+            700: '#1E293B'
           }
         },
         metal: {
-          gold: "#FFD700",
-          iron: "#C0C0C0",
-          bronze: "#9c5221"
+          gold: '#FFD700',
+          iron: '#C0C0C0',
+          bronze: '#9c5221'
         }
       }
     }
-  },
-  plugins: []
+  }
 }

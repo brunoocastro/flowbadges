@@ -12,9 +12,9 @@ export const LargeCard = ({ badges }) => {
           return (
             <section
               key={badge.code}
-              className="p-16 col-span-3 gap-y-[16px] bg-slate-800 rounded-md"
+              className="p-4 col-span-3 gap-y-[16px] bg-base-background rounded-md"
             >
-              <div className="bg-yellow-300 hover:opacity-75 w-full h-fit mb-16 rounded-md cursor-pointe relative">
+              <div className="bg-yellow-300 hover:opacity-75 w-full h-fit mb-4 rounded-md cursor-pointe relative">
                 <Image
                   src={badge.high || badge.src}
                   width="100"
@@ -28,9 +28,9 @@ export const LargeCard = ({ badges }) => {
               </div>
               <div className="col-span-2">
                 <div className="body flex flex-col justify-between h-full">
-                  <div className="tags grid grid-cols-1 md:grid-cols-4 gap-y-16 md:gap-16">
+                  <div className="tags grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-4">
                     <span
-                      className={`w-100 py-4 flex items-center justify-center rounded-md ${
+                      className={`w-100 py-1 flex items-center justify-center rounded-md ${
                         position === '1º'
                           ? 'bg-metal-gold text-yellow-800'
                           : position === '2º'
@@ -44,8 +44,8 @@ export const LargeCard = ({ badges }) => {
                     </span>
                     <CopyBadgeCode code={badge.code} />
                   </div>
-                  <div className="infos flex flex-col justify-center text-xs text-slate-400 mt-16">
-                    <p className="mb-8">
+                  <div className="infos flex flex-col justify-center text-xs text-slate-400 mt-4">
+                    <p className="mb-2">
                       <span className="text-slate-300">Nome: </span>
                       {badge.name}
                     </p>
@@ -54,7 +54,7 @@ export const LargeCard = ({ badges }) => {
                       {badge.count}
                     </p>
                   </div>
-                  <div className="text-sm p-16 mt-16 text-center italic">
+                  <div className="text-sm p-4 mt-4 text-center italic">
                     &#8220;{badge.description}
                     &#8221;
                   </div>

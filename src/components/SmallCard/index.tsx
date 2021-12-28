@@ -18,7 +18,7 @@ export const SmallCard = ({ badges }) => {
         return (
           <section
             key={badge.code}
-            className="p-16 col-span-4 grid grid-cols-3 gap-[16px] bg-slate-800 rounded-md"
+            className="p-2 col-span-4 grid grid-cols-3 gap-[16px] bg-base-background rounded-md"
           >
             <div className="">
               <Image
@@ -34,14 +34,14 @@ export const SmallCard = ({ badges }) => {
             </div>
             <div className="col-span-2">
               <div className="body flex flex-col justify-between h-full">
-                <div className="tags grid grid-cols-4 gap-16">
-                  <span className="w-100 py-4 flex items-center justify-center rounded-md text-slate-300">
+                <div className="tags grid grid-cols-4 gap-2">
+                  <span className="w-100 py-2 flex items-center justify-center rounded-md text-slate-300">
                     {position}
                   </span>
                   <CopyBadgeCode code={badge.code} />
                 </div>
-                <div className="infos flex flex-col justify-center text-xs text-slate-400 mt-16">
-                  <p className="mb-8">
+                <div className="infos flex flex-col justify-center text-xs text-slate-400 mt-2">
+                  <p className="mb-2">
                     <span className="text-slate-300">Nome: </span>
                     {badge.name}
                   </p>
