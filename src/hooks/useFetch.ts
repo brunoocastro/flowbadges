@@ -17,5 +17,5 @@ export function useFetch<Data = any>(
     }
   )
 
-  return { data, error }
+  return { data, error, isLoading: !error && !data }
 }
