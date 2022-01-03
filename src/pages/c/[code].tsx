@@ -1,62 +1,29 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
+import BadgeContent from '../../components/BadgeContent'
 import flow from '../../constants/flow'
-import { useFetch } from '../../hooks/useFetch'
-import { BadgesResponse, MarketBadgeResponse } from '../../types'
+import { BadgesResponse } from '../../types'
 
 const BadgePage = ({
   code,
   badge
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { isFallback } = useRouter()
-
-  const marketLink = encodeURI(flow.link.badgeMarketData(String(code)))
-
-  const { data: market, isLoading } = useFetch<MarketBadgeResponse>(
-    marketLink,
-    {
-      keepalive: true,
-      method: 'get',
-      mode: 'cors'
-    }
-  )
-
-  if (isFallback || !market || isLoading) return <div>Carregando Dados</div>
-
-  const { img, count, name, position, percent } = badge
-
-  console.log('badge', badge)
-
   return (
     <div>
       <div>
-        <div className="flex flex-col">
-          <Image src={img} alt={name} height={'100px'} width={'100px'} />
-          <h1>{name}</h1>
-          <div>
-            <span>{position}º Posição</span>
-            <span>{count} resgates</span>
-            <span>{percent}</span>
-            <span>
-              {market.feed.map(item => `${item.action} por  ${item.value}`)}
-            </span>
-          </div>
+        <div
+          className="
+        absolute z-50 w-3/4 max-w-3xl
+        rounded-lg h-auto max-h-[600px]
+        bg-opacity-90 m-auto left-0 right-0 top-0 bottom-0
+        text-base-white p-4
+         border-2 border-base-yellow-700 bg-base-background
+        "
+        >
+          <BadgeContent badge={badge} code={code} />
         </div>
       </div>
     </div>
   )
-}
-
-interface Props {
-  code: string
-  badge: {
-    name: string
-    description: string
-    count: number
-    img: string
-    data: Date
-  }
 }
 
 export const getStaticProps: GetStaticProps = async context => {
@@ -73,11 +40,7 @@ export const getStaticProps: GetStaticProps = async context => {
     return badge.code.toLowerCase() === String(code).toLowerCase()
   })
 
-  console.log('Index', badgeIndex)
-
   const badge = badgesList.badges[badgeIndex]
-
-  console.log('Badge', badge)
 
   if (!badge) {
     return {
@@ -97,7 +60,7 @@ export const getStaticProps: GetStaticProps = async context => {
       img: badge.high || badge.src,
       percent: badge.percentage_badge,
       data: badge.starts_on,
-      position: badgeIndex + 1
+      position: badgeIndex
     }
   }
 
