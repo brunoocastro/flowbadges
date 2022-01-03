@@ -4,7 +4,6 @@ import {
   Dispatch,
   SetStateAction,
   useCallback,
-  useMemo,
   useState
 } from 'react'
 import { useFetch } from '../../hooks/useFetch'
@@ -13,6 +12,9 @@ import { SmallCard } from '../../components/SmallCard'
 import { Search } from '../../components/Search'
 import { BadgesResponse } from '../../types'
 import filters from '../../constants/filters'
+import Head from 'next/head'
+import { GetStaticProps } from 'next'
+import flow from '../../constants/flow'
 
 interface BadgeContextProps {
   selectedItem: string
@@ -30,7 +32,7 @@ export const BadgeContext = createContext<BadgeContextProps>(
   {} as BadgeContextProps
 )
 
-const Rank = () => {
+const Ranking = ({ badges }) => {
   const [thisBadge, setThisBadge] = useState('')
   const [show, setShow] = useState(false)
 
@@ -49,7 +51,7 @@ const Rank = () => {
   const getAllBadges =
     'https://stickers-flow3r-2eqj3fl3la-ue.a.run.app/v1/badges?sort=desc'
 
-  const { data } = useFetch<BadgesResponse>(getAllBadges)
+  const { data } = useFetch<BadgesResponse>(flow.link.allBadges)
   // const badgesList = useMemo(() => data?.badges, [data])
   const badgesList = data?.badges
 
@@ -61,18 +63,27 @@ const Rank = () => {
 
   const badgesOnSearch =
     (searchText &&
-      badgesOrdered?.filter(({ code, name, description }) => {
+      badgesOrdered?.filter(({ code, name, description, src, high }) => {
         return (
           code.toLowerCase().includes(searchText.toLowerCase()) ||
           name.toLowerCase().includes(searchText.toLowerCase()) ||
-          description.toLowerCase().includes(searchText.toLowerCase())
+          description.toLowerCase().includes(searchText.toLowerCase()) ||
+          src?.toLowerCase().includes(searchText.toLowerCase()) ||
+          high?.toLowerCase().includes(searchText.toLowerCase())
         )
       })) ||
     []
 
   return (
     <>
-      <main className="min-h-fit w-screen flex flex-wrap justify-center overflow-x-hidden">
+      <Head>
+        <title>Ranking - Flow Badges</title>
+      </Head>
+      <main
+        className="min-h-fit w-screen h-screen flex flex-wrap
+      justify-center overflow-y-scroll overflow-x-hidden scrollbar-thin
+      scrollbar-thumb-base-white scrollbar-track-base-background"
+      >
         <BadgeContext.Provider
           value={{
             selectedItem: thisBadge,
@@ -87,19 +98,19 @@ const Rank = () => {
           }}
         >
           <div className="content-center sm:w-10/12 max-w-4xl text-slate-100 p-4 ">
-            <div className="w-full overflow-hidden flex flex-col">
+            <div className="w-full flex flex-col">
               <Search />
               <div
-                className="overflow-y-auto h-[40vh] xl:h-[65vh] 2xl:h-[70vh] px-3
+                className="px-3
               scrollbar-thin scrollbar-thumb-base-white scrollbar-track-base-background"
               >
                 {searchText === '' ? (
                   <>
                     <div className="mt-1 xl:mt-4 grid grid-cols-1 sm:grid-cols-9 gap-[16px] mb-10">
                       <h2 className="col-span-full">Pódio</h2>
-                      {data && (
+                      {badgesList && (
                         <>
-                          <LargeCard badges={badgesList} />
+                          <LargeCard badges={badgesOrdered} />
                         </>
                       )}
                     </div>
@@ -107,9 +118,9 @@ const Rank = () => {
                       className={`mt-4 grid grid-cols-1 sm:grid-cols-8 gap-[16px]`}
                     >
                       <h2 className="col-span-full">Todas badges</h2>
-                      {data && (
+                      {badgesList && (
                         <>
-                          <SmallCard badges={badgesList} />
+                          <SmallCard badges={badgesOrdered} />
                         </>
                       )}
                     </div>
@@ -121,7 +132,7 @@ const Rank = () => {
                     <h2 className="col-span-full">
                       Pesquisando por &#34;{searchText}&#34;
                     </h2>
-                    {data && (
+                    {badges && (
                       <>
                         <SmallCard badges={badgesOnSearch} />
                       </>
@@ -137,4 +148,19 @@ const Rank = () => {
   )
 }
 
-export default Rank
+export default Ranking
+
+// export const getStaticProps: GetStaticProps = async () => {
+//   const request = await fetch(flow.link.allBadges, {
+//     method: 'GET',
+//     mode: 'cors'
+//   })
+//   const data: BadgesResponse = await request.json()
+
+//   return {
+//     props: {
+//       badges: data.badges
+//     },
+//     revalidate: 30
+//   }
+// }
