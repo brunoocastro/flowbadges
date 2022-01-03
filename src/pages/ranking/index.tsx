@@ -69,9 +69,9 @@ const Rank = ({ badges }) => {
 
   return (
     <>
-      {/* <Head>
+      <Head>
         <title>Ranking - Flow Badges</title>
-      </Head> */}
+      </Head>
       <main className="min-h-fit w-screen flex flex-wrap justify-center overflow-x-hidden">
         <BadgeContext.Provider
           value={{

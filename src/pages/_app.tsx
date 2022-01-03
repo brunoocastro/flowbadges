@@ -9,7 +9,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
     <>
       <Head>
         <title>Flow Badges</title>
-        <link rel="icon" href="favicon.ico" />
+        {/* <link rel="icon" href="favicon.ico" /> */}
       </Head>
       <Toaster
         position="top-right"

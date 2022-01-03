@@ -9,13 +9,13 @@ export default class MyDocument extends Document {
       <Html lang="pt">
         <Head>
           <meta charSet="utf-8" />
-          <link rel="icon" href="favicon.ico" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
             href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@400;500;700&display=swap"
             rel="stylesheet"
           />
+          <link rel="icon" href="favicon.ico" />
         </Head>
         <body className="relative bg-home bg-base-backgroundDark h-screen w-screen overflow-hidden">
           <div className="min-h-screen w-screen flex flex-col justify-between">
