@@ -50,6 +50,24 @@ export interface MarketTradeData {
   created_at: string
   high: string
   accept_trade: false
+  offer:
+    | {
+        badge: {
+          enabled: boolean
+          value: number
+        }
+        sparks: { enabled: boolean; value: number }
+      }
+    | undefined
+  trade:
+    | {
+        badge: {
+          enabled: boolean
+          value: number
+        }
+        sparks: { enabled: boolean; value: number }
+      }
+    | undefined
 }
 
 export interface MarketBadgeResponse {
