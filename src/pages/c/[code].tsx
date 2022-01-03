@@ -1,12 +1,14 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import BadgeContent from '../../components/BadgeContent'
 import flow from '../../constants/flow'
-import { BadgesResponse } from '../../types'
+import { BadgeData, BadgesResponse } from '../../types'
 
 const BadgePage = ({
   code,
   badge
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  console.log('Log de teste')
+
   return (
     <div>
       <div>
@@ -36,6 +38,8 @@ export const getStaticProps: GetStaticProps = async context => {
 
   const badgesList: BadgesResponse = await request.json()
 
+  badgesList.badges.sort((a: BadgeData, b: BadgeData) => a.count - b.count)
+
   const badgeIndex = badgesList.badges.findIndex(badge => {
     return badge.code.toLowerCase() === String(code).toLowerCase()
   })
@@ -59,8 +63,8 @@ export const getStaticProps: GetStaticProps = async context => {
       count: badge.count,
       img: badge.high || badge.src,
       percent: badge.percentage_badge,
-      data: badge.starts_on,
-      position: badgeIndex
+      date: badge.starts_on,
+      position: badgeIndex + 1
     }
   }
 

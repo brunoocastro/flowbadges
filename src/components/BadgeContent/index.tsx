@@ -7,7 +7,10 @@ import flow from '../../constants/flow'
 import { useFetch } from '../../hooks/useFetch'
 import { MarketBadgeResponse } from '../../types'
 import verifyPodcast from '../../utils/verifyPodcast'
-import { ExternalLinkIcon } from '@radix-ui/react-icons'
+import { ExternalLinkIcon, CopyIcon } from '@radix-ui/react-icons'
+import toast from 'react-hot-toast'
+import Link from 'next/link'
+import TradeCard from '../TradeCard'
 
 interface Props {
   code: string
@@ -29,7 +32,7 @@ interface tradeData {
   high: string
   accept_sparks: boolean
   starts_on: string
-  value: number
+  value?: number
   updated_at: string
   created_at: string
   accept_trade: boolean
@@ -38,6 +41,13 @@ interface tradeData {
   description: string
   code: string
   src: string
+  offer: {
+    badge: {
+      enabled: boolean
+      value: number
+    }
+    sparks: { enabled: boolean; value: 0.1 }
+  }
 }
 
 interface feedData {
@@ -68,7 +78,6 @@ interface badgeFeedData {
 }
 
 const BadgeContent = (props: Props) => {
-  console.log('Props', props)
   const { code, badge } = props
 
   const { isFallback } = useRouter()
@@ -83,23 +92,14 @@ const BadgeContent = (props: Props) => {
       mode: 'cors'
     }
   )
-  const { data } = useFetch<badgeFeedData>(flow.link.badgeMarketData(code))
 
   const { count, date, img, name, position, percent } = props.badge
 
-  const programDate = new Date(date)
-
-  console.log(date)
+  const programDate = useMemo(() => new Date(date), [date])
 
   const podcast = useMemo(() => verifyPodcast(img), [img])
-  console.log('Code', podcast, img)
 
-  // const rarity = useMemo(
-  //   () => (maxPercentBadge - percentage_badge) * 100,
-  //   [percentage_badge, maxPercentBadge]
-  // )
-
-  if (isFallback || isLoading || !market || !props.badge || !props.code)
+  if (isFallback || !props.badge || !props.code)
     return <div>Carregando Dados</div>
 
   return (
@@ -108,21 +108,20 @@ const BadgeContent = (props: Props) => {
       h-full w-full
       text-base-white p-4
       "
-      // bg-opacity-90 m-auto left-0 right-0 top-0 bottom-0
-      // w-3/4 max-w-3xl
-      // rounded-lg h-auto max-h-[600px]
-      // border-2 border-base-yellow-700 bg-base-yellow-400
     >
       <Head>
         <title>{name} | Flow Badges</title>
       </Head>
-      {badge && position && (
-        <div className="flex flex-col text-base-black font-sans text-lg">
+      {badge && position >= 0 && (
+        <div
+          className="h-full grid gap-4 text-base-white
+         font-sans text-lg -top-24 relative"
+        >
           <div
-            className="flex flex-col w-full h-full mx-auto
-            content-center justify-center text-center"
+            className="w-full h-fit mx-auto
+            content-center justify-center text-center "
           >
-            <div className="header -top-24 relative flex flex-col gap-3">
+            <div className="header flex flex-col gap-3">
               <div
                 className="relative h-48 w-48 md:h-56 md:w-56 bg-yellow-300 mx-auto border-2 border-yellow-300
               rounded-md flex content-center "
@@ -139,23 +138,64 @@ const BadgeContent = (props: Props) => {
               <h1 className="font-sans text-4xl font-bold text-base-white">
                 {code.toUpperCase()}
               </h1>
+
+              <h1 className="font-sans text-xl font-bold text-base-white">
+                {podcast ? `${podcast} do` : 'Ao vivo no '} dia{' '}
+                {programDate.toLocaleDateString('pt-BR')}
+              </h1>
+
               <div className="flex justify-center text-sm text-gray-400  gap-2">
                 <span>{position}º Posição</span>|<span>{count} resgates</span>|
                 <span>{percent}% Raro</span>
               </div>
             </div>
-            <div className="buttons grid grid-cols-2 grid-rows-1  gap-3">
-              <button className="rounded-xl border-2 h-12">#{code}</button>
-              <button className="rounded-xl border-2 h-12 flex justify-center items-center x">
-                <span>Ir para o mercado</span>
-                <ExternalLinkIcon />
-              </button>
-            </div>
           </div>
+          <div className="buttons grid grid-cols-2 grid-rows-1 gap-3  h-12 text-base-white ">
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(code)
+                toast.success(`O código "${code}" foi copiado!`)
+              }}
+              className="rounded-xl border-2 border-base-yellow-700  flex justify-center items-center gap-3"
+            >
+              <span>#{code}</span>
+              <CopyIcon color="#FFB709" />
+            </button>
+            <a
+              href={flow.link.market}
+              target={'_blank'}
+              rel="noreferrer"
+              className="rounded-xl border-2 border-base-yellow-700 flex justify-center items-center gap-3 grid-flow-row"
+            >
+              <span>Ir para o mercado</span>
+              <ExternalLinkIcon color="#FFB709" />
+            </a>
+          </div>
+          <div className="cards grid grid-cols-2 w-full justify-around">
+            <TradeCard
+              title="Ofertas"
+              key="Ofertas"
+              prices={
+                !isLoading || market
+                  ? market.actualTradesAsc?.map(data => data.value)
+                  : []
+              }
+            />
+            <TradeCard
+              title="Encomendas"
+              key="Encomendas"
+              prices={
+                !isLoading || market
+                  ? market.actualOffersAsc?.map(
+                      data => data.offer?.sparks.value
+                    )
+                  : []
+              }
+            />
+          </div>
+          )
         </div>
       )}
-
-      <h1 className="text-base-white">Podcast: {podcast}</h1>
     </div>
   )
 }

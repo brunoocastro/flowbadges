@@ -95,6 +95,10 @@ module.exports = {
           gold: '#FFD700',
           iron: '#C0C0C0',
           bronze: '#9c5221'
+        },
+        flow: {
+          primary: '#FFB709',
+          background: '#1e293b',
         }
       }
     }
