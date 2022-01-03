@@ -15,7 +15,7 @@ const BadgePage = ({
         <div
           className="
         absolute z-50 w-3/4 max-w-3xl
-        rounded-lg h-auto max-h-[600px]
+        rounded-lg h-auto max-h-[550px] 2xl:max-h-[600px]
         bg-opacity-90 m-auto left-0 right-0 top-0 bottom-0
         text-base-white p-4
          border-2 border-base-yellow-700 bg-base-background

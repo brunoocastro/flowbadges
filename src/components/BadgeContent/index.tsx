@@ -106,7 +106,7 @@ const BadgeContent = (props: Props) => {
     <div
       className="relative z-50
       h-full w-full
-      text-base-white p-4
+      text-base-white p-8 2xl:p-4
       "
     >
       <Head>
@@ -115,7 +115,7 @@ const BadgeContent = (props: Props) => {
       {badge && position >= 0 && (
         <div
           className="h-full grid gap-4 text-base-white
-         font-sans text-lg -top-24 relative"
+         font-sans text-lg -top-20 2xl:-top-24 relative"
         >
           <div
             className="w-full h-fit mx-auto
@@ -123,7 +123,7 @@ const BadgeContent = (props: Props) => {
           >
             <div className="header flex flex-col gap-3">
               <div
-                className="relative h-48 w-48 md:h-56 md:w-56 bg-yellow-300 mx-auto border-2 border-yellow-300
+                className="relative h-36 w-36 2xl:h-56 2xl:w-56 bg-yellow-300 mx-auto border-2 border-yellow-300
               rounded-md flex content-center "
               >
                 <Image
@@ -135,7 +135,7 @@ const BadgeContent = (props: Props) => {
                   onClick={() => window.open(img, '_blank')}
                 />
               </div>
-              <h1 className="font-sans text-4xl font-bold text-base-white">
+              <h1 className="font-sans text-3xl 2xl:text-4xl font-bold text-base-white">
                 {code.toUpperCase()}
               </h1>
 
@@ -193,7 +193,6 @@ const BadgeContent = (props: Props) => {
               }
             />
           </div>
-          )
         </div>
       )}
     </div>

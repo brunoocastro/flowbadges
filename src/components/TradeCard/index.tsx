@@ -7,7 +7,7 @@ export const TradeCard = (props: TradeCardProps) => {
   const { prices, title } = props
 
   return (
-    <div className="h-48 min-w-32 bg-base-black rounded-xl m-2">
+    <div className="h-44 2xl:h-48 min-w-32 bg-base-black rounded-xl m-2">
       <div
         className="header h-[20%] w-full flex items-center justify-center bg-flow-primary rounded-t-xl
       font-sans font-bold text-base-white text-base"
