@@ -32,10 +32,6 @@ const Home: React.FC = () => {
   return (
     <>
       <div>
-        <Head>
-          <title>Flow Badges</title>
-        </Head>
-
         <main className="w-full h-full grid place-items-center mt-10 md:mt-0 mb-10 ">
           <nav>
             <ul className="grid grid-cols-[289px] md:grid-cols-[289px_289px] gap-8">

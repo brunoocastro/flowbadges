@@ -2,17 +2,23 @@ import useSWR from 'swr'
 
 export function useFetch<Data = any>(
   url: string,
-  initial: RequestInit = { method: 'GET', mode: 'cors' }
+  initial: RequestInit = {},
+  swrOptions = {}
 ) {
   const { data, error } = useSWR<Data>(
     url,
     async url => {
-      const response = await fetch(url, initial)
+      const response = await fetch(url, {
+        ...initial,
+        method: 'GET',
+        mode: 'cors'
+      })
       const data = await response.json()
 
       return data
     },
     {
+      ...swrOptions,
       errorRetryCount: 3
     }
   )

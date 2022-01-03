@@ -1,62 +1,32 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
+import BadgeContent from '../../components/BadgeContent'
+import filters from '../../constants/filters'
 import flow from '../../constants/flow'
-import { useFetch } from '../../hooks/useFetch'
-import { BadgesResponse, MarketBadgeResponse } from '../../types'
+import { BadgeData, BadgesResponse } from '../../types'
 
 const BadgePage = ({
   code,
   badge
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { isFallback } = useRouter()
-
-  const marketLink = encodeURI(flow.link.badgeMarketData(String(code)))
-
-  const { data: market, isLoading } = useFetch<MarketBadgeResponse>(
-    marketLink,
-    {
-      keepalive: true,
-      method: 'get',
-      mode: 'cors'
-    }
-  )
-
-  if (isFallback || !market || isLoading) return <div>Carregando Dados</div>
-
-  const { img, count, name, position, percent } = badge
-
-  console.log('badge', badge)
+  console.log('Log de teste', process.env.VERCEL_ENV)
 
   return (
     <div>
       <div>
-        <div className="flex flex-col">
-          <Image src={img} alt={name} height={'100px'} width={'100px'} />
-          <h1>{name}</h1>
-          <div>
-            <span>{position}º Posição</span>
-            <span>{count} resgates</span>
-            <span>{percent}</span>
-            <span>
-              {market.feed.map(item => `${item.action} por  ${item.value}`)}
-            </span>
-          </div>
+        <div
+          className="
+        absolute z-50 w-3/4 max-w-3xl
+        rounded-lg h-auto max-h-[550px] 2xl:max-h-[600px]
+        bg-opacity-90 m-auto left-0 right-0 top-0 bottom-0
+        text-base-white p-4
+         border-2 border-base-yellow-700 bg-base-background
+        "
+        >
+          <BadgeContent badge={badge} code={code} />
         </div>
       </div>
     </div>
   )
-}
-
-interface Props {
-  code: string
-  badge: {
-    name: string
-    description: string
-    count: number
-    img: string
-    data: Date
-  }
 }
 
 export const getStaticProps: GetStaticProps = async context => {
@@ -69,15 +39,13 @@ export const getStaticProps: GetStaticProps = async context => {
 
   const badgesList: BadgesResponse = await request.json()
 
+  badgesList.badges.sort((a: BadgeData, b: BadgeData) => a.count - b.count)
+
   const badgeIndex = badgesList.badges.findIndex(badge => {
     return badge.code.toLowerCase() === String(code).toLowerCase()
   })
 
-  console.log('Index', badgeIndex)
-
   const badge = badgesList.badges[badgeIndex]
-
-  console.log('Badge', badge)
 
   if (!badge) {
     return {
@@ -96,14 +64,14 @@ export const getStaticProps: GetStaticProps = async context => {
       count: badge.count,
       img: badge.high || badge.src,
       percent: badge.percentage_badge,
-      data: badge.starts_on,
+      date: badge.starts_on,
       position: badgeIndex + 1
     }
   }
 
   return {
     props,
-    revalidate: 10
+    revalidate: 30
   }
 }
 
@@ -115,11 +83,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const data: BadgesResponse = await request.json()
 
+  data.badges.sort(filters.byRarity.filterFunction).splice(10)
+
   const paths = data.badges.map(badge => ({
     params: {
       code: badge.code
     }
   }))
+
+  console.log(paths)
 
   return { paths, fallback: 'blocking' }
 }
