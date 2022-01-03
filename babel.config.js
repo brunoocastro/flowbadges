@@ -1,4 +1,7 @@
 module.exports = {
   presets: ['next/babel'],
-  plugins: ['inline-react-svg']
+  plugins: [
+    // 'transform-remove-console',
+    'inline-react-svg'
+]
 }
