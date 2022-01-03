@@ -32,7 +32,7 @@ export const BadgeContext = createContext<BadgeContextProps>(
   {} as BadgeContextProps
 )
 
-const Rank = ({ badges }) => {
+const Ranking = ({ badges }) => {
   const [thisBadge, setThisBadge] = useState('')
   const [show, setShow] = useState(false)
 
@@ -48,7 +48,14 @@ const Rank = ({ badges }) => {
     [thisBadge]
   )
 
-  const badgesOrdered = badges?.sort(
+  const getAllBadges =
+    'https://stickers-flow3r-2eqj3fl3la-ue.a.run.app/v1/badges?sort=desc'
+
+  const { data } = useFetch<BadgesResponse>(flow.link.allBadges)
+  // const badgesList = useMemo(() => data?.badges, [data])
+  const badgesList = data?.badges
+
+  const badgesOrdered = badgesList?.sort(
     orderingMode === filters.byRarity.code
       ? filters.byRarity.filterFunction
       : filters.byDate.filterFunction
@@ -72,7 +79,11 @@ const Rank = ({ badges }) => {
       <Head>
         <title>Ranking - Flow Badges</title>
       </Head>
-      <main className="min-h-fit w-screen flex flex-wrap justify-center overflow-x-hidden">
+      <main
+        className="min-h-fit w-screen h-screen flex flex-wrap
+      justify-center overflow-y-scroll overflow-x-hidden scrollbar-thin
+      scrollbar-thumb-base-white scrollbar-track-base-background"
+      >
         <BadgeContext.Provider
           value={{
             selectedItem: thisBadge,
@@ -90,16 +101,16 @@ const Rank = ({ badges }) => {
             <div className="w-full flex flex-col">
               <Search />
               <div
-                className="overflow-y-scroll px-3
+                className="px-3
               scrollbar-thin scrollbar-thumb-base-white scrollbar-track-base-background"
               >
                 {searchText === '' ? (
                   <>
                     <div className="mt-1 xl:mt-4 grid grid-cols-1 sm:grid-cols-9 gap-[16px] mb-10">
                       <h2 className="col-span-full">Pódio</h2>
-                      {badges && (
+                      {badgesList && (
                         <>
-                          <LargeCard badges={badges} />
+                          <LargeCard badges={badgesOrdered} />
                         </>
                       )}
                     </div>
@@ -107,9 +118,9 @@ const Rank = ({ badges }) => {
                       className={`mt-4 grid grid-cols-1 sm:grid-cols-8 gap-[16px]`}
                     >
                       <h2 className="col-span-full">Todas badges</h2>
-                      {badges && (
+                      {badgesList && (
                         <>
-                          <SmallCard badges={badges} />
+                          <SmallCard badges={badgesOrdered} />
                         </>
                       )}
                     </div>
@@ -137,19 +148,19 @@ const Rank = ({ badges }) => {
   )
 }
 
-export default Rank
+export default Ranking
 
-export const getStaticProps: GetStaticProps = async () => {
-  const request = await fetch(flow.link.allBadges, {
-    method: 'GET',
-    mode: 'cors'
-  })
-  const data: BadgesResponse = await request.json()
+// export const getStaticProps: GetStaticProps = async () => {
+//   const request = await fetch(flow.link.allBadges, {
+//     method: 'GET',
+//     mode: 'cors'
+//   })
+//   const data: BadgesResponse = await request.json()
 
-  return {
-    props: {
-      badges: data.badges
-    },
-    revalidate: 30
-  }
-}
+//   return {
+//     props: {
+//       badges: data.badges
+//     },
+//     revalidate: 30
+//   }
+// }
