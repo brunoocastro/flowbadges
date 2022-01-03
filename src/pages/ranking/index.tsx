@@ -32,7 +32,7 @@ export const BadgeContext = createContext<BadgeContextProps>(
   {} as BadgeContextProps
 )
 
-const Ranking = ({ badges }) => {
+const Ranking = () => {
   const [thisBadge, setThisBadge] = useState('')
   const [show, setShow] = useState(false)
 
@@ -132,7 +132,7 @@ const Ranking = ({ badges }) => {
                     <h2 className="col-span-full">
                       Pesquisando por &#34;{searchText}&#34;
                     </h2>
-                    {badges && (
+                    {badgesList && (
                       <>
                         <SmallCard badges={badgesOnSearch} />
                       </>
@@ -149,18 +149,3 @@ const Ranking = ({ badges }) => {
 }
 
 export default Ranking
-
-// export const getStaticProps: GetStaticProps = async () => {
-//   const request = await fetch(flow.link.allBadges, {
-//     method: 'GET',
-//     mode: 'cors'
-//   })
-//   const data: BadgesResponse = await request.json()
-
-//   return {
-//     props: {
-//       badges: data.badges
-//     },
-//     revalidate: 30
-//   }
-// }
