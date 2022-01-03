@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import BadgeContent from '../../components/BadgeContent'
+import filters from '../../constants/filters'
 import flow from '../../constants/flow'
 import { BadgeData, BadgesResponse } from '../../types'
 
@@ -7,7 +8,7 @@ const BadgePage = ({
   code,
   badge
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log('Log de teste')
+  console.log('Log de teste', process.env.VERCEL_ENV)
 
   return (
     <div>
@@ -70,7 +71,7 @@ export const getStaticProps: GetStaticProps = async context => {
 
   return {
     props,
-    revalidate: 10
+    revalidate: 30
   }
 }
 
@@ -82,11 +83,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const data: BadgesResponse = await request.json()
 
+  data.badges.sort(filters.byRarity.filterFunction).splice(10)
+
   const paths = data.badges.map(badge => ({
     params: {
       code: badge.code
     }
   }))
+
+  console.log(paths)
 
   return { paths, fallback: 'blocking' }
 }
