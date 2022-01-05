@@ -1,7 +1,10 @@
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { HiOutlineArrowRight } from 'react-icons/hi'
+import filters from '../constants/filters'
+import flow from '../constants/flow'
 import socialLinks from '../constants/social'
 
 const Home: React.FC = () => {
@@ -69,3 +72,57 @@ const Home: React.FC = () => {
 }
 
 export default Home
+
+export const getStaticProps: GetStaticProps = async context => {
+  const { username } = context.params
+
+  const request = await fetch(flow.link.profile(String(username)), {
+    method: 'GET',
+    mode: 'cors'
+  })
+
+  const { user, count } = await request.json()
+
+  if (!user) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  const props = {
+    username,
+    userData: {
+      ...user
+    },
+    count
+  }
+
+  return {
+    props,
+    revalidate: 30
+  }
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const request = await fetch(flow.link.ranking, {
+    method: 'GET',
+    mode: 'cors'
+  })
+
+  const data = await request.json()
+
+  data.badges.sort(filters.byRarity.filterFunction).splice(25)
+
+  const paths = data.ranking.map(user => ({
+    params: {
+      code: user.username
+    }
+  }))
+
+  console.log(paths)
+
+  return { paths, fallback: 'blocking' }
+}
